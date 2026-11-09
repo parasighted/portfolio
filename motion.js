@@ -256,6 +256,47 @@ document.querySelectorAll("[data-carousel]").forEach((root) => {
   }, TICK);
 });
 
+/* Lightbox: [data-lightbox] opens its image in a full-window popup. Closes with the cross, Esc or a click outside the image.
+   A plain fixed layer rather than <dialog>, so the custom cursor can stay above it. */
+(() => {
+  const triggers = document.querySelectorAll("[data-lightbox]");
+  if (!triggers.length) return;
+  const box = document.createElement("div");
+  box.className = "lightbox";
+  box.setAttribute("role", "dialog");
+  box.setAttribute("aria-modal", "true");
+  box.setAttribute("aria-label", "Expanded image");
+  box.hidden = true;
+  box.innerHTML = `<div class="lightbox__scroll"><img alt=""></div><button class="lightbox__close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>`;
+  document.body.appendChild(box);
+  const img = box.querySelector("img");
+  const closeBtn = box.querySelector(".lightbox__close");
+  let opener = null;
+  const close = () => {
+    if (box.hidden) return;
+    box.hidden = true;
+    document.documentElement.classList.remove("lightbox-open");
+    if (opener) opener.focus({ preventScroll: true });
+  };
+  triggers.forEach((t) => t.addEventListener("click", () => {
+    const source = t.querySelector("img");
+    img.src = source.currentSrc || source.src;
+    img.alt = source.alt;
+    opener = t;
+    box.hidden = false;
+    box.querySelector(".lightbox__scroll").scrollLeft = 0;
+    document.documentElement.classList.add("lightbox-open");
+    closeBtn.focus({ preventScroll: true });
+  }));
+  closeBtn.addEventListener("click", close);
+  box.addEventListener("click", (e) => { if (e.target !== img) close(); });
+  document.addEventListener("keydown", (e) => {
+    if (box.hidden) return;
+    if (e.key === "Escape") close();
+    else if (e.key === "Tab") e.preventDefault();   // the cross is the only control
+  });
+})();
+
 /* Custom cursor: a dot that follows the mouse and shrinks over anything clickable. It says "View project" or "Coming soon" over home tiles,
    and "Previous" or "Next" over carousel images. Its colour follows what's behind it, so it shows on very light and very dark images.
    Touch screens and forced-colours mode keep their normal behaviour. If this script fails, the normal cursor stays. */
@@ -272,6 +313,7 @@ document.querySelectorAll("[data-carousel]").forEach((root) => {
   const TILE = ".project:not(.project--soon) .shot__frame";
   const SLIDE = "[data-carousel] .shot__frame";
   const SOON = ".project--soon .shot__frame";
+  const ZOOM = "[data-lightbox]";
   const FOLLOW = 0.35;          // share of the remaining distance covered each frame
   const LIGHT_LUMINANCE = 0.27; // above this, purple text has more contrast than white
   let x = 0, y = 0, tx = 0, ty = 0, started = false, queued = false;
@@ -329,7 +371,7 @@ document.querySelectorAll("[data-carousel]").forEach((root) => {
     const soon = !slide && el.closest(SOON);
     const tile = !slide && !soon && el.closest(TILE);
     const back = slide && tx < slide.getBoundingClientRect().left + slide.getBoundingClientRect().width / 2;
-    const text = slide ? (back ? "Previous" : "Next") : soon ? "Coming soon" : tile ? (tile.closest(".project")?.dataset.cursor || "View project") : "";
+    const text = slide ? (back ? "Previous" : "Next") : soon ? "Coming soon" : tile ? (tile.closest(".project")?.dataset.cursor || "View project") : el.closest(ZOOM) ? "Expand" : "";
     if (text && label.textContent !== text) label.textContent = text;
     const flipped = slide ? back : tx > window.innerWidth - 190;   // keep labels on screen near the right edge
 

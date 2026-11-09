@@ -686,3 +686,15 @@ html.has-cursor .carousel__btn:not(:focus-visible) { position: absolute; width: 
 /* The home intro splits words into inline-blocks, which don't inherit a link's underline. */
 .home-intro a .word { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.12em; }
 .project--soon .shot__frame video { scale: none !important; }
+
+/* Click-to-expand image popup (motion.js) */
+.lightbox-trigger { display: block; width: 100%; padding: 0; border: 0; font: inherit; cursor: zoom-in; }
+html.lightbox-open { overflow: hidden; scrollbar-gutter: stable; }
+.lightbox { position: fixed; inset: 0; z-index: 9000; background: var(--color-bg); animation: lightbox-in 0.25s ease; }
+.lightbox[hidden] { display: none; }
+.lightbox__scroll { display: flex; width: 100%; height: 100%; padding: 72px clamp(16px, 2vw, 48px); overflow: auto; overscroll-behavior: contain; }
+.lightbox__scroll img { flex: none; width: max(100%, 1400px); max-width: none; height: auto; margin: auto 0; border-radius: var(--radius); }
+.lightbox__close { position: absolute; top: 16px; right: clamp(16px, 2vw, 48px); width: 44px; height: 44px; padding: 10px; border: 0; background: none; color: var(--color-fg); cursor: pointer; }
+.lightbox__close svg { display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
+@keyframes lightbox-in { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .lightbox { animation: none; } }

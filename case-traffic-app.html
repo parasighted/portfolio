@@ -17,7 +17,7 @@
     if (!matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.add("has-curtain");
   })();
 </script>
-  <link rel="stylesheet" href="styles.css?v=72">
+  <link rel="stylesheet" href="styles.css?v=73">
 </head>
 <body>
 <div class="page-curtain" aria-hidden="true"><span class="serif">Saloni Sinha</span></div>
@@ -180,10 +180,43 @@
         <figcaption>Drag to compare the components in light and dark.</figcaption>
       </figure>
 
+      <figure class="col-content shot reveal">
+        <div class="compare" data-compare>
+          <img src="assets/cases/svv-components-2-dark.jpg" width="1920" height="1080" loading="lazy" alt="Trafikk forecast, trip planning, road detail and alert components in dark theme">
+          <div class="compare__top">
+            <img src="assets/cases/svv-components-2-light.jpg" width="1920" height="1080" loading="lazy" alt="Trafikk forecast, trip planning, road detail and alert components in light theme">
+          </div>
+        </div>
+        <figcaption>More components, from closure forecasts to trip planning and road details.</figcaption>
+      </figure>
+
+      <h2 class="col-label row__label reveal">Map routes</h2>
+      <div class="col-content prose reveal">
+        <p>Road status also had to read clearly on the map. Striped lines mark stretches with a status, such as closures, roadworks and risk of closure, while solid lines mark stretches without one, such as national tourist roads and private roads. Routes, blocked routes and ferry routes each have their own style, in both light and dark.</p>
+      </div>
+      <figure class="col-content shot reveal">
+        <button class="shot__frame shot__frame--natural lightbox-trigger" type="button" data-lightbox aria-label="Expand the map line styles image"><img src="assets/cases/svv-map-routes.jpg" width="2000" height="394" loading="lazy" alt="Overview of map line styles for stretches with and without status, routes and ferry routes, in light and dark maps"></button>
+        <figcaption>Map line styles for stretches and routes, in light and dark.</figcaption>
+      </figure>
+
+      <h2 class="col-label row__label reveal">Documentation</h2>
+      <div class="col-content prose reveal">
+        <p>Guidelines sit alongside the components, so teams can apply the system the same way. The spacing guide, for example, shows how padding and spacing tokens work at page and component level.</p>
+      </div>
+      <figure class="col-content shot reveal">
+        <div class="shot__frame shot__frame--natural"><img src="assets/cases/svv-spacing-guidelines.jpg" width="1517" height="2000" loading="lazy" alt="Spacing and padding guidelines with token annotations on a mobile page and on card components"></div>
+        <figcaption>Spacing and padding guidelines, annotated on a full page and on individual cards.</figcaption>
+      </figure>
+
       <h2 class="col-label row__label reveal">Key experiences</h2>
       <figure class="col-content shot reveal">
-        <div class="shot__frame shot__frame--16x9"><img src="assets/cases/svv-exp-explorer.jpg" width="2000" height="1125" loading="lazy" alt="Explorer page with traffic messages and a dark map on phone and desktop"></div>
-        <figcaption>Explorer on phone and desktop, in dark theme.</figcaption>
+        <div class="compare" data-compare>
+          <img src="assets/cases/svv-exp-explorer.jpg" width="2000" height="1125" loading="lazy" alt="Explorer page with traffic messages and a dark map on phone and desktop">
+          <div class="compare__top">
+            <img src="assets/cases/svv-exp-explorer-light.jpg" width="1920" height="1080" loading="lazy" alt="Explorer page with traffic messages and a light map on phone and desktop">
+          </div>
+        </div>
+        <figcaption>Drag to compare Explorer on phone and desktop, in light and dark.</figcaption>
       </figure>
 
       <div class="col-content carousel reveal" data-carousel role="group" aria-roledescription="carousel" aria-label="Key experiences" tabindex="0">
@@ -261,6 +294,6 @@
 
 <script src="theme.js?v=72"></script>
 <script src="nav.js?v=72"></script>
-<script src="motion.js?v=74"></script>
+<script src="motion.js?v=75"></script>
 </body>
 </html>
