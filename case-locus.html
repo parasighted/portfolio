@@ -12,7 +12,7 @@
   (function () {
     var d = document.documentElement, t;
     try { t = localStorage.getItem("theme"); } catch (e) {}
-    if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    if (!t) t = "light";
     d.dataset.theme = t;
     if (!matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.add("has-curtain");
   })();
