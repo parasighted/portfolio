@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://salonisinha.com/sitemap.xml
