@@ -1,0 +1,688 @@
+/* Portfolio 2027 — tokens from Figma, fluid layout built around the 1440px design */
+
+:root {
+  /* Design tokens: names match the Figma variables on the "Design System" page */
+  --color-purple: #4a00b9;
+  --color-green: #005e16;
+  --color-white: #ffffff;
+  --color-hero-scrim: rgba(0, 0, 0, 0.2);
+  --color-hover-overlay: rgba(24, 24, 27, 0.62);
+  --color-image-placeholder: #eeeeee;
+  --radius-note: 14px;
+
+  /* semantic tokens: these switch between light and dark (same names as the Figma variables) */
+  --color-fg: var(--color-purple);
+  --color-bg: var(--color-white);
+  --color-accent: var(--color-green);
+
+  /* short aliases used throughout this file */
+  --purple: var(--color-fg);
+  --green: var(--color-accent);
+  --white: var(--color-bg);
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "Inter", system-ui, sans-serif;
+
+  --pad: clamp(18px, 5.1vw, 143px);          /* page side padding (74px at 1440) */
+  --radius: clamp(14px, 1.8vw, 50px);       /* 26px at 1440 */
+  --section-gap: clamp(56px, 8vw, 224px);
+
+  /* type scale, each step hits its Figma size at 1440px */
+  --t-display: clamp(34px, 4.45vw, 125px);   /* 64px */
+  --t-title: clamp(28px, 3.34vw, 94px);     /* 48px */
+  --t-lede: clamp(24px, 3.1vw, 87px);       /* 45px */
+  --t-body: clamp(17px, 1.3vw, 36px);        /* ~19px at 1440 */
+  --t-label: clamp(14px, 1.04vw, 29px);     /* 15px */
+  --t-ui: 20px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--white);
+  color: var(--purple);
+  font: 300 var(--t-body)/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+.serif, .meta dd {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  line-height: 1.2;
+}
+.accent { color: var(--green); font-weight: 700; }
+
+/* ---------- Nav ---------- */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: clamp(14px, 1.6vw, 45px) clamp(16px, 1.5vw, 42px);
+  font-size: var(--t-ui);
+  font-weight: 400;
+  background: transparent;
+  transition: color 0.25s ease;
+}
+.nav ul { display: flex; gap: clamp(16px, 2.5vw, 70px); }
+.nav a { padding-block: 6px; }          /* comfortable tap target */
+.nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.nav--light { color: var(--color-white); }
+.nav.is-solid { color: var(--purple); }   /* header stays transparent */
+
+/* ---------- Layout grid ----------
+   Label column + content column, positioned as in Figma (135 / 569 / 693px at 1440).
+   Collapses to one column below 820px. */
+/* Hero and nav run edge to edge; everything else is capped on very wide screens */
+.page { width: 100%; }
+.case-head, .case-body, .home-intro, .projects, .archive, .more, .footer { max-width: 2800px; margin-inline: auto; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 9.4% 20.9% 9.2% 48.1% 1fr;
+}
+.grid > .col-label   { grid-column: 2; }
+.grid > .col-content { grid-column: 4; min-width: 0; }
+
+/* ---------- Case hero ---------- */
+.hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1444 / 566;
+  min-height: 300px;
+  overflow: hidden;
+  background: #111;
+}
+.hero img { width: 100%; height: 100%; object-fit: cover; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 2%, rgba(102, 102, 102, 0) 18.6%), var(--color-hero-scrim); }
+
+/* ---------- Case header ---------- */
+.case-head { padding-top: clamp(32px, 4vw, 112px); }
+.case-title, .case-tagline { font-size: var(--t-title); }
+
+.meta { display: grid; gap: clamp(22px, 2.6vw, 73px); margin-top: clamp(28px, 3.7vw, 104px); }
+.meta dt { font-size: var(--t-label); }
+.meta dd { font-size: clamp(15px, 1.11vw, 31px); }
+
+.case-intro { margin-top: clamp(28px, 3.7vw, 104px); display: grid; gap: 18px; }
+.case-intro .prose { align-content: start; } /* keep paragraphs together when the details list makes this row taller */
+
+/* ---------- Case body ---------- */
+.case-body { padding-top: var(--section-gap); row-gap: clamp(48px, 6.7vw, 188px); }
+.row__label { font-size: var(--t-label); font-weight: 500; }
+.prose { display: grid; gap: 1.1em; }
+.prose p { font-size: var(--t-body); line-height: 1.55; max-width: 62ch; }
+.prose strong { font-weight: 400; text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+
+.lede { font-size: var(--t-lede); line-height: 1.4; }
+.lede__accent { color: var(--color-accent); }
+.lede em { text-decoration: underline; text-underline-offset: 0.14em; text-decoration-thickness: 1px; }
+
+figure.shot { display: grid; gap: 10px; }
+.shot__frame { border-radius: var(--radius); overflow: hidden; background: var(--color-image-placeholder); aspect-ratio: 4 / 3; }
+.shot__frame img { width: 100%; height: 100%; object-fit: cover; }
+.shot figcaption { font-size: 13px; opacity: 0.75; }
+
+.note {
+  border: 1px dashed currentColor;
+  border-radius: var(--radius-note);
+  padding: 12px 16px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+/* ---------- Other projects / archive ---------- */
+.more { padding: var(--section-gap) var(--pad) 0; }
+.more h2 { font-size: var(--t-label); font-weight: 300; margin-bottom: 20px; }
+.more__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: clamp(20px, 2.2vw, 62px); }
+
+.card { display: block; }
+.card .shot__frame { aspect-ratio: 1293 / 602; }
+.card h3 { font-size: clamp(22px, 2.2vw, 62px); margin-top: 14px; }
+.card p { font-size: clamp(15px, 1.25vw, 35px); font-weight: 400; margin-top: 6px; }
+.card h3, .project h2 { text-decoration: underline transparent; text-underline-offset: 0.12em; text-decoration-thickness: 1px; transition: text-decoration-color 0.3s ease; }
+.card:hover h3, .project:hover h2 { text-decoration-color: currentColor; }
+
+/* ---------- Footer ---------- */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px 32px;
+  padding: var(--section-gap) var(--pad) 36px;
+  font-size: clamp(14px, 1.4vw, 39px);
+}
+.footer ul { display: flex; gap: clamp(20px, 2.2vw, 62px); }
+.footer a { display: block; padding: 8px; margin: -8px; }
+/* social icons are inline SVGs in currentColor, so they follow the foreground colour (purple, or lavender in dark mode) and work from file:// too */
+.footer .icon { display: block; width: 28px; height: 28px; color: var(--color-fg); transition: opacity 0.3s ease; }
+.footer a:hover .icon { opacity: 0.7; }
+
+/* ---------- Home ---------- */
+.home-intro { padding: clamp(96px, 9.2vw, 258px) var(--pad) 0; font-size: var(--t-display); line-height: 1.15; }
+.projects { padding: clamp(48px, 7vw, 196px) var(--pad) 0; display: grid; gap: clamp(56px, 10vw, 280px); }
+.project { display: block; }
+.project .shot__frame { aspect-ratio: 1293 / 602; }
+.project h2 { font-size: var(--t-title); margin-top: 17px; }
+.project p { font-size: clamp(16px, 1.67vw, 47px); font-weight: 400; margin-top: 12px; }
+.archive { padding: var(--section-gap) var(--pad) 0; }
+.archive span { display: block; font-size: var(--t-label); margin-bottom: 8px; }
+.archive h2 { font-size: var(--t-title); }
+
+/* ---------- Scroll reveal ---------- */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- Tablet / mobile: single column ---------- */
+@media (max-width: 820px) {
+  .grid { grid-template-columns: var(--pad) minmax(0, 1fr) var(--pad); row-gap: 14px; }
+  .grid > .col-label,
+  .grid > .col-content { grid-column: 2; }
+
+  .meta { grid-template-columns: 1fr 1fr; column-gap: 20px; }
+  .meta > div:last-child { grid-column: 1 / -1; }
+  .case-body { row-gap: 36px; }
+  .case-body .col-label:empty { display: none; }
+  .lede { line-height: 1.3; }
+  .shot__frame { aspect-ratio: 5 / 4; }
+}
+
+@media (max-width: 600px) {
+  .nav { font-size: 16px; }   /* 20px would not fit name + four links on a phone */
+  .nav ul { gap: 14px; }
+  .footer { flex-direction: column; align-items: flex-start; }
+}
+
+/* ---------- Polish ---------- */
+::selection { background: var(--purple); color: var(--white); }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; border-radius: 4px; }
+.nav--light :focus-visible { outline-color: var(--color-white); }
+h1, h2, h3, .lede, .case-tagline { text-wrap: balance; }
+.prose p, .about__text p { text-wrap: pretty; }
+.nav a[aria-current="page"] { color: var(--green); text-decoration: underline; text-underline-offset: 4px; }
+
+/* Parallax: scaled so the drift never exposes an edge */
+.is-parallax { will-change: transform; transform: scale(1.1); }
+.shot__frame img, .hero img { transition: opacity 0.6s ease; }
+
+/* ---------- About ---------- */
+.about {
+  width: 88%;                      /* 1266 / 1440 */
+  max-width: 2400px;
+  margin-inline: auto;
+  padding-top: clamp(96px, 9.2vw, 258px);
+  display: grid;
+  gap: clamp(64px, 10.4vw, 291px);
+}
+.about__intro { font-size: var(--t-display); line-height: 1.15; }
+.about__block { display: grid; gap: clamp(16px, 2.15vw, 60px); }
+.about__label { font-size: clamp(17px, 2.22vw, 62px); font-weight: 300; line-height: 1.2; }
+.about__text { font-size: var(--t-display); line-height: 1.15; }
+.about__text p + p { margin-top: 1.1em; }
+.about__text a {
+  color: var(--green);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.12em;
+  transition: opacity 0.2s ease;
+}
+.about__text a:hover { opacity: 0.7; }
+.about + .footer { padding-top: clamp(80px, 11vw, 308px); }
+
+@media (max-width: 820px) {
+  .about { width: calc(100% - 2 * var(--pad)); }
+  .about__intro, .about__text { line-height: 1.2; }
+}
+
+/* ---------- Tablet / mobile type + touch targets (one scale shared by all pages) ---------- */
+@media (max-width: 820px) {
+  :root {
+    --t-display: clamp(28px, 6vw, 168px);
+    --t-title: clamp(26px, 4.6vw, 129px);
+    --t-lede: clamp(24px, 4.8vw, 134px);
+    --t-body: 17px;
+    --t-label: 15px;
+  }
+  .nav a { padding-block: 10px; }       /* ~44px tap height */
+  .about__label { font-size: clamp(17px, 2.8vw, 78px); }
+}
+
+/* ---------- Link rules (see "Links" on the Figma Design System page) ----------
+   Inline link: green, 1px underline 0.12em below, hover 70% opacity.
+   Nav link: no underline at rest, hover underline, current page green + underlined.
+   Project link: whole card is the link, title underlines and thumbnail tints on hover.
+   Focus: 2px green outline, 4px offset (white over a hero). */
+.link,
+.prose a,
+.about__text a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.12em;
+  transition: opacity 0.3s ease;
+}
+.link:hover, .prose a:hover, .about__text a:hover { opacity: 0.7; }
+
+/* ---------- Home: thumbnail overlay (like the Semplice hover on the current site) ---------- */
+.project .shot__frame, .card .shot__frame { position: relative; }
+.thumb-hover {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  gap: 6px;
+  padding: 24px;
+  text-align: center;
+  color: var(--color-white);
+  background: var(--color-hover-overlay);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.thumb-hover__title { font-size: clamp(22px, 2.4vw, 67px); line-height: 1.15; transform: translateY(8px); transition: transform 0.45s cubic-bezier(.2, .7, .2, 1); }
+.thumb-hover__type  { font-size: clamp(15px, 1.25vw, 35px); font-weight: 400; transform: translateY(8px); transition: transform 0.55s cubic-bezier(.2, .7, .2, 1); }
+.project:hover .thumb-hover, .card:hover .thumb-hover,
+.project:focus-visible .thumb-hover, .card:focus-visible .thumb-hover { opacity: 1; }
+.project:hover .thumb-hover__title, .card:hover .thumb-hover__title,
+.project:hover .thumb-hover__type,  .card:hover .thumb-hover__type { transform: none; }
+@media (hover: none) { .thumb-hover { display: none; } }   /* no hover on touch screens */
+
+/* ---------- Home: a little life (flat colours only: bg + fg + accent) ---------- */
+.page { position: relative; z-index: 0; overflow-x: clip; }
+.home-intro { position: relative; }
+
+/* intro words rise in one after another */
+.word { display: inline-block; opacity: 0; transform: translateY(0.45em); animation: word-in 0.9s cubic-bezier(.2, .7, .2, 1) forwards; }
+@keyframes word-in { to { opacity: 1; transform: none; } }
+
+/* the + turns a quarter once, then again on hover */
+.home-intro .accent { display: inline-block; animation: plus-turn 1.4s cubic-bezier(.3, .7, .2, 1) 1.2s both; transition: transform 0.6s cubic-bezier(.3, .7, .2, 1); }
+.home-intro:hover .accent { transform: rotate(90deg); }
+@keyframes plus-turn { from { transform: rotate(-90deg); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* project images open like a curtain as they enter */
+.project.reveal .shot__frame { clip-path: inset(14% 0 0 0 round var(--radius)); transition: clip-path 1.1s cubic-bezier(.2, .7, .2, 1); }
+.project.reveal.in .shot__frame { clip-path: inset(0 0 0 0 round var(--radius)); }
+
+/* project type slides a little as the title underlines */
+.project p { transition: transform 0.4s cubic-bezier(.2, .7, .2, 1); }
+.project:hover p { transform: translateX(6px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .home-intro .accent { animation: none; }
+  .word { animation: none; opacity: 1; transform: none; }
+  .project.reveal .shot__frame { clip-path: none; transition: none; }
+  .thumb-hover, .thumb-hover__title, .thumb-hover__type, .project p { transition: none; }
+}
+
+
+/* ---------- 12-column grid (modelled on the Semplice thumbnail grid of the current site) ----------
+   12 columns, page padding 74px and a ~100px gutter at 1440px. Items span 6+6, 8+4, 6 and so on.
+   Documented on the Figma Design System page under "Grid". */
+:root { --gutter: clamp(32px, 6.9vw, 193px); }
+
+.projects {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: clamp(56px, 8vw, 224px);
+  align-items: start;
+}
+.project { grid-column: span 6; }
+.project[data-span="8"] { grid-column: span 8; }
+.project[data-span="4"] { grid-column: span 4; }
+.project[data-span="12"] { grid-column: span 12; }
+
+.project .shot__frame { aspect-ratio: 4 / 3; }
+.project[data-span="8"] .shot__frame { aspect-ratio: 16 / 10; }
+.project h2 { font-size: clamp(24px, 2.4vw, 67px); margin-top: 16px; }
+.project[data-span="4"] h2 { font-size: clamp(22px, 2vw, 56px); }
+.project p { font-size: clamp(15px, 1.25vw, 35px); margin-top: 8px; }
+
+.projects .archive { grid-column: span 6; align-self: end; padding: 0; max-width: none; margin: 0; }
+.projects .archive h2 { font-size: clamp(24px, 2.4vw, 67px); }
+
+.more__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+.more__grid .card { grid-column: span 6; }
+
+@media (max-width: 1100px) { :root { --gutter: 32px; } }
+@media (max-width: 820px) {
+  .project, .project[data-span], .projects .archive, .more__grid .card { grid-column: 1 / -1; }
+  .project .shot__frame, .project[data-span="8"] .shot__frame { aspect-ratio: 4 / 3; }
+  .project h2, .project[data-span="4"] h2 { font-size: clamp(24px, 6vw, 168px); }
+  .projects .archive { align-self: start; }
+}
+
+/* ---------- Dark mode ----------
+   Toggled with the pill in the nav. Saved in localStorage; first visit follows the system setting. */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --color-fg: #ffffff;
+  --color-bg: #202a32;
+  --color-accent: #b3a6d9;
+  --color-image-placeholder: #2a353e;
+}
+html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after {
+  transition: background-color 0.45s ease, color 0.45s ease, border-color 0.45s ease, fill 0.45s ease, filter 0.45s ease !important;
+}
+
+.theme-toggle {
+  flex: none;
+  position: relative;
+  width: 64px;
+  height: 36px;
+  padding: 0;
+  margin-left: clamp(8px, 1.2vw, 34px);
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  align-self: center;
+}
+.theme-toggle::before { content: ""; position: absolute; inset: -6px 0; }   /* 44px+ tap target without a bigger pill */
+/* The icon itself is the knob: a sun on the left in light mode, a solid crescent on the right in dark */
+.theme-toggle__knob {
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  width: 26px;
+  height: 26px;
+  margin-top: -13px;
+  display: grid;
+  place-items: center;
+  transition: transform 0.5s cubic-bezier(.3, .7, .2, 1);
+}
+.theme-toggle__knob svg { grid-area: 1 / 1; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; overflow: visible; transition: opacity 0.3s ease, transform 0.5s cubic-bezier(.3, .7, .2, 1); }
+.theme-toggle .sun circle { fill: currentColor; }
+.theme-toggle .moon { fill: currentColor; stroke-width: 1; opacity: 0; transform: rotate(-70deg) scale(0.6); }
+html[data-theme="dark"] .theme-toggle__knob { transform: translateX(28px); }
+html[data-theme="dark"] .theme-toggle .sun { opacity: 0; transform: rotate(70deg) scale(0.6); }
+html[data-theme="dark"] .theme-toggle .moon { opacity: 1; transform: none; }
+.theme-toggle:hover .theme-toggle__knob { transform: translateX(2px); }
+html[data-theme="dark"] .theme-toggle:hover .theme-toggle__knob { transform: translateX(26px); }
+@media (max-width: 820px) {
+  .theme-toggle { width: 54px; height: 30px; }
+  .theme-toggle::before { inset: -8px 0; }
+  .theme-toggle__knob { width: 22px; height: 22px; margin-top: -11px; left: 3px; }
+  html[data-theme="dark"] .theme-toggle__knob { transform: translateX(24px); }
+  html[data-theme="dark"] .theme-toggle:hover .theme-toggle__knob { transform: translateX(22px); }
+}
+@media (prefers-reduced-motion: reduce) { .theme-toggle__knob, .theme-toggle__knob svg { transition: none !important; } }
+/* Keep the slide while the page's colours fade (that fade rule uses !important) */
+@media (prefers-reduced-motion: no-preference) {
+  html.theme-anim .theme-toggle__knob { transition: transform 0.5s cubic-bezier(.3, .7, .2, 1) !important; }
+  html.theme-anim .theme-toggle__knob svg { transition: opacity 0.3s ease, transform 0.5s cubic-bezier(.3, .7, .2, 1), stroke 0.45s ease, fill 0.45s ease !important; }
+}
+
+/* ---------- Page curtain (page-to-page transition) ---------- */
+.page-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  place-items: center;
+  background: var(--color-purple);
+  color: var(--color-white);
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+.page-curtain span { font-size: clamp(24px, 2.6vw, 73px); opacity: 0; transition: opacity 0.4s ease; }
+.has-curtain .page-curtain { display: grid; transform: translateY(0); }
+.has-curtain .page-curtain span { opacity: 1; }
+.has-curtain.is-ready .page-curtain { transform: translateY(-100%); transition: transform 0.9s cubic-bezier(.77, 0, .18, 1); }
+.has-curtain.is-ready .page-curtain span { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) { .page-curtain { display: none !important; } }
+
+/* ---------- Case page tweaks from the updated Figma frame ---------- */
+/* shorter hero, more air above the title, other-projects aligned to the content column */
+.case-head { padding-top: clamp(56px, 8.9vw, 249px); }
+.case-body { padding-top: clamp(64px, 11.25vw, 315px); }
+.more { display: grid; grid-template-columns: 9.4% 20.9% 9.2% 48.1% 1fr; padding: clamp(48px, 6.7vw, 188px) 0 0; }
+.more > * { grid-column: 4; }
+.more__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(12px, 1.3vw, 36px); }
+.more__grid .card { grid-column: auto; }
+.more .card .shot__frame { aspect-ratio: 4 / 3; }
+.more .card h3 { font-size: clamp(22px, 2.2vw, 62px); }
+.more + .footer { padding-top: clamp(48px, 6.7vw, 188px); }
+@media (max-width: 820px) {
+  .hero { aspect-ratio: 5 / 4; }
+  .more { grid-template-columns: var(--pad) minmax(0, 1fr) var(--pad); padding-right: 0; }
+  .more > * { grid-column: 2; }
+  .more__grid { grid-template-columns: 1fr; row-gap: 32px; }
+  .case-body { padding-top: 64px; }
+}
+
+/* alignment fixes against the Figma frame */
+.meta { gap: clamp(16px, 1.67vw, 47px); }
+.more { padding-right: 0; }
+
+/* ---------- Case tagline marquee (only the tagline moves; the title stays fixed) ---------- */
+.case-tagline.is-marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+.tagline-track { display: flex; width: max-content; will-change: transform; }
+.tagline-unit { display: flex; flex: none; }
+.tagline-unit > span { padding-right: 1.4em; }   /* gap between repeats, no separator */
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- Play (layout from the Figma "Play" frame: big intro, rounded images in two staggered columns) ---------- */
+:root { --radius-play: clamp(18px, 2.8vw, 78px); }   /* 40px at 1440, down from 64px */
+.play { width: calc(100% - 2 * var(--pad)); max-width: 2600px; margin-inline: auto; padding-top: clamp(96px, 9.2vw, 258px); }
+.play__intro { max-width: 2000px; display: grid; gap: clamp(20px, 2.6vw, 73px); }
+.play__intro h1, .play__lede { font-size: var(--t-display); line-height: 1.15; font-weight: 300; font-family: var(--serif); font-variation-settings: "SOFT" 0, "WONK" 1; text-wrap: pretty; }
+.play__note { font-size: var(--t-body); }
+
+.play__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(20px, 4.2vw, 118px);
+  align-items: start;
+  margin-top: clamp(64px, 9vw, 252px);
+}
+.play__col { display: flex; flex-direction: column; gap: clamp(40px, 6vw, 168px); min-width: 0; }
+.play__col--left { align-items: flex-start; }
+.play__col--right { align-items: flex-end; padding-top: clamp(80px, 20vw, 560px); }   /* right column starts lower, as in Figma */
+.play__item { width: var(--w, 100%); display: grid; gap: 14px; }
+.play .shot__frame { border-radius: var(--radius-play); width: 100%; }
+.play .shot__frame img { height: 100%; }
+.play__item figcaption { display: grid; gap: 2px; padding-inline: clamp(6px, 1vw, 28px); }
+.play__title { font-size: clamp(18px, 1.5vw, 42px); line-height: 1.25; }
+.play__meta { font-size: 14px; opacity: 0.8; }
+.play__item--wide { width: 100%; margin-top: clamp(64px, 9vw, 252px); }
+.play + .footer { padding-top: clamp(72px, 9vw, 252px); }
+
+@media (max-width: 820px) {
+  .play__grid { display: block; }
+  .play__col { display: contents; }                       /* flatten, then restore the alternating order */
+  .play__grid { display: flex; flex-direction: column; gap: 40px; }
+  .play__item { order: var(--n); width: 100%; }
+  .play__col--right { padding-top: 0; }
+}
+
+/* ---------- Play: moving things and sounds ---------- */
+.play__motion { margin-top: clamp(96px, 12vw, 336px); }
+.play__motion-title { font-size: var(--t-display); line-height: 1.15; font-weight: 300; max-width: 2000px; text-wrap: pretty; }
+.play__motion .play__grid { margin-top: clamp(48px, 7vw, 196px); }
+.shot__frame video { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--color-image-placeholder); }
+.shot__frame.is-missing { display: grid; place-items: center; }
+.shot__frame.is-missing::after { content: "Video file coming soon"; font-size: 14px; opacity: 0.7; }
+.shot__frame.is-missing video { display: none; }
+.play__meta + .play__meta { margin-top: 4px; max-width: 62ch; }
+
+/* ---------- Case pages: image pairs and grids inside the content column ---------- */
+.shot-pair, .shot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(12px, 1.3vw, 36px); row-gap: clamp(24px, 2.6vw, 73px); }
+.shot-pair figure, .shot-grid figure { display: grid; gap: 10px; margin: 0; align-content: start; }
+.shot-pair figcaption, .shot-grid figcaption { font-size: 13px; line-height: 1.45; opacity: 0.8; }
+.shot-grid figcaption { font-size: 14px; }
+.shot-grid figcaption strong { font-weight: 500; }
+@media (max-width: 600px) { .shot-grid { grid-template-columns: 1fr; } }
+
+/* Home: a project can start part-way across the 12 columns, like the offset tiles on the old site */
+.project[data-start="7"] { grid-column: 7 / span 6; }
+@media (max-width: 820px) { .project[data-start] { grid-column: 1 / -1; } }
+
+/* Album covers: release type and listening link under each description */
+.prose__meta { font-size: 14px !important; opacity: 0.85; }
+.prose__meta a { color: var(--color-accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.12em; }
+
+/* Minimal carousel: scroll-snap track, arrows and a counter underneath */
+.shot__frame--16x9 { aspect-ratio: 16 / 9; }
+.shot__frame--3x2 { aspect-ratio: 3 / 2; }
+.shot__frame--showcase { aspect-ratio: 1800 / 1470; }
+.shot__frame--natural { aspect-ratio: auto; }
+.shot__frame--natural img { height: auto; }
+.carousel { display: grid; gap: 14px; min-width: 0; }
+.carousel__track { display: flex; gap: clamp(12px, 1.3vw, 36px); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.carousel__track::-webkit-scrollbar { display: none; }
+.carousel__slide { flex: 0 0 100%; scroll-snap-align: start; margin: 0; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.carousel__slide figcaption { font-size: 13px; opacity: 0.75; }
+.carousel__bar { display: flex; align-items: center; justify-content: flex-end; gap: 4px; font-size: 14px; }
+.carousel__count { font-variant-numeric: tabular-nums; opacity: 0.75; min-width: 3.5ch; text-align: center; }
+.carousel__btn { width: 44px; height: 44px; padding: 0; border: 0; background: none; color: inherit; font: inherit; font-size: 18px; line-height: 1; cursor: pointer; transition: opacity 0.2s ease; }
+.carousel__btn:hover { opacity: 0.55; }
+
+/* Before/after comparison slider. --pos is set by motion.js. */
+.compare { --pos: 50%; position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--radius); background: var(--color-image-placeholder); cursor: ew-resize; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.compare__top { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.compare__label { position: absolute; left: 12px; bottom: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(17, 17, 17, 0.72); color: #fff; font-size: 13px; line-height: 1.3; pointer-events: none; }
+.compare__label--end { left: auto; right: 12px; }
+.compare__handle { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: var(--color-purple); pointer-events: none; }
+/* No shadows: a hairline edge keeps the white line and handle visible on white images */
+.compare__knob { position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: #fff; color: #111; border: 1px solid rgba(0, 0, 0, 0.18); transform: translate(-50%, -50%); transition: transform 0.2s ease; }
+.compare.is-dragging .compare__knob { transform: translate(-50%, -50%) scale(1.08); }
+.compare:has(input:focus-visible) .compare__knob { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+@media (max-width: 820px) { .compare__knob { width: 44px; height: 44px; } }
+
+/* Case results: key numbers and a client quote */
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2.2vw, 62px); margin: 0; }
+.stats > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 8px; }
+.stats dt { font-size: var(--t-label); opacity: 0.75; }
+.stats dd { margin: 0; font-size: var(--t-title); line-height: 1.1; }
+.quote { margin: 0; display: grid; gap: 16px; }
+.quote footer { font-size: var(--t-label); opacity: 0.75; }
+@media (max-width: 820px) { .stats { grid-template-columns: 1fr; } }
+.carousel__btn:focus-visible { outline: 2px solid var(--color-fg); outline-offset: -2px; border-radius: 4px; }
+@media (hover: none) { .carousel__btn:hover { opacity: 1; } }
+.case-figure { margin-top: clamp(28px, 3.7vw, 104px); }
+/* Large screens: the details list spans both rows, so it can't push the intro figure down. Gap matches .case-body sections. */
+@media (min-width: 821px) {
+  .case-figure { margin-top: clamp(48px, 6.7vw, 188px); }
+  .case-head:has(.case-figure) .meta { grid-row: span 2; align-content: start; }
+}
+
+/* Other projects: title and type sit inside the image, over a dark layer.
+   White text passes contrast even over a pure white image: see the gradient stops. */
+.more .card { display: grid; grid-template-rows: minmax(0, 1fr) auto auto; grid-template-columns: minmax(0, 1fr); color: #fff; border-radius: var(--radius); }
+.more .card .shot__frame { grid-area: 1 / 1 / -1 / -1; aspect-ratio: 1 / 1; }
+.more .card .shot__frame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0, 0, 0, 0.64) 0%, rgba(0, 0, 0, 0.55) 75%, rgba(0, 0, 0, 0.15) 100%); pointer-events: none; }
+.more .card h3, .more .card p { position: relative; z-index: 1; padding-inline: clamp(16px, 1.7vw, 48px); }
+.more .card h3 { grid-area: 2 / 1; margin-top: clamp(16px, 1.7vw, 48px); font-size: clamp(22px, 2vw, 56px); line-height: 1.2; }
+.more .card h3::after { content: "→" / ""; display: inline-block; margin-left: 0.3em; transition: transform 0.3s ease; }
+.more .card:hover h3::after { transform: translateX(4px); }
+.more .card p { grid-area: 3 / 1; margin: 6px 0 clamp(16px, 1.7vw, 48px); font-size: clamp(14px, 1.04vw, 29px); }
+.more .card .thumb-hover { display: none; }
+.more .card:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 3px; border-radius: var(--radius); }
+@media (max-width: 820px) { .more .card .shot__frame { aspect-ratio: 4 / 3; } }
+@media (prefers-reduced-motion: reduce) { .more .card h3::after { transition: none; } }
+
+/* Custom cursor (mouse only, added by motion.js): a dot that shrinks over clickable things and says "View project" on home tiles. */
+html.has-cursor, html.has-cursor * { cursor: none !important; }
+.cursor { --cursor-color: var(--color-purple); position: fixed; top: 0; left: 0; z-index: 10000; width: 0; height: 0; pointer-events: none; opacity: 0; will-change: translate; transition: opacity 0.2s ease; }
+html[data-theme="dark"] .cursor { --cursor-color: var(--color-accent); }
+.cursor.is-visible { opacity: 1; }
+.cursor__dot { position: absolute; top: -12px; left: -12px; width: 24px; height: 24px; border-radius: 50%; background: var(--cursor-color); transition: scale 0.2s ease, background-color 0.2s ease; }
+.cursor.is-small .cursor__dot { scale: 0.5; }
+.cursor__label { position: absolute; top: 0; left: 22px; color: #fff; font-size: clamp(22px, 1.8vw, 50px); line-height: 1; white-space: nowrap; opacity: 0; translate: 0 -50%; transition: opacity 0.2s ease; }
+.cursor.is-labelled .cursor__label { opacity: 1; }
+/* Tones set by motion.js from what's behind the cursor */
+.cursor.is-on-dark .cursor__dot { background: #fff; }
+.cursor.is-on-light .cursor__dot { background: var(--color-purple); }
+.cursor.is-on-light .cursor__label { color: var(--color-purple); }
+/* "Coming soon": a spinning multicolour wait dot */
+.cursor.is-soon .cursor__dot { background: conic-gradient(#ff5f6d, #ffb347, #ffe259, #5ed36b, #3fb8ff, #8a6cff, #ff5fc4, #ff5f6d); animation: cursor-spin 1.1s linear infinite; }
+@keyframes cursor-spin { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .cursor.is-soon .cursor__dot { animation: none; } }
+.cursor.is-flipped .cursor__label { left: auto; right: 22px; }
+/* The label replaces the tile's title overlay for mouse users; keyboard focus still shows the title */
+html.has-cursor .project .thumb-hover > * { visibility: hidden; }
+html.has-cursor .project:focus-visible .thumb-hover > * { visibility: visible; }
+@media (prefers-reduced-motion: reduce) { .cursor, .cursor__dot, .cursor__label { transition: none; } }
+
+/* Tiles: the image zooms in slightly on hover. Uses `scale`, which adds to the parallax `transform` set by motion.js. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .project .shot__frame img, .project .shot__frame video, .more .card .shot__frame img { transition: opacity 0.6s ease, scale 0.9s cubic-bezier(.2, .7, .2, 1); }
+  .project:hover .shot__frame img, .project:hover .shot__frame video, .more .card:hover .shot__frame img { scale: 1.04; }
+}
+
+/* A home tile for a case that isn't ready: not a link, so no hover effects, with a visible badge */
+.project__badge { position: absolute; top: clamp(12px, 1.2vw, 32px); left: clamp(12px, 1.2vw, 32px); z-index: 1; padding: 6px 12px; border-radius: 999px; background: rgba(17, 17, 17, 0.8); color: #fff; font-size: clamp(13px, 1.04vw, 29px); line-height: 1.3; }
+/* With a mouse, "Coming soon" appears on the cursor instead; the badge stays for touch screens and screen readers */
+@media (hover: hover) and (pointer: fine) and (forced-colors: none) {
+  .project__badge { width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+.project--soon h2 { text-decoration: none !important; }
+.project--soon .shot__frame img { scale: none !important; }
+.project--soon:hover p { transform: none; }
+
+/* Carousels with the custom cursor: Previous/Next live on the cursor, so the arrows stay out of sight until tabbed to.
+   Touch screens and keyboards still get working buttons. */
+html.has-cursor .carousel__btn:not(:focus-visible) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+/* Other projects on small screens: text links only, no images */
+@media (max-width: 820px) {
+  .more__grid { row-gap: 20px; }
+  .more .card { display: block; color: var(--color-fg); border-radius: 4px; }
+  .more .card .shot__frame { display: none; }
+  .more .card h3 { margin-top: 0; padding-inline: 0; font-size: clamp(22px, 5.6vw, 40px); }
+  .more .card p { margin: 4px 0 0; padding-inline: 0; }
+}
+
+/* Award coin (Odeabank): turns continuously between two awards. Pauses on hover or keyboard focus. */
+.award-coin { --size: clamp(116px, 9.4vw, 204px); display: block; width: var(--size); height: var(--size); perspective: calc(var(--size) * 5); border-radius: 50%; }
+.award-coin:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 4px; }
+.award-coin__body { display: block; position: relative; width: 100%; height: 100%; transform-style: preserve-3d; animation: award-flip 4s linear infinite; }
+.award-coin:hover .award-coin__body, .award-coin:focus .award-coin__body { animation-play-state: paused; }
+.award-coin__face { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #fff; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.award-coin__if { width: 84%; height: auto; }
+.award-coin__rd { width: 70%; height: auto; }
+.award-coin__face--back { transform: rotateY(180deg); }
+@keyframes award-flip { to { transform: rotateY(360deg); } }
+@media (max-width: 820px) {
+  .meta > .awards, .meta:has(.awards) > div:nth-last-child(2) { grid-column: 1 / -1; }
+}
+/* Reduced motion: no flipping, both awards side by side */
+@media (prefers-reduced-motion: reduce) {
+  .award-coin { width: auto; height: auto; display: flex; gap: 10px; perspective: none; border-radius: 0; }
+  .award-coin__body { display: flex; gap: 10px; width: auto; height: auto; animation: none; transform-style: flat; }
+  .award-coin__face { position: static; width: var(--size); height: var(--size); transform: none; }
+}
+
+/* Home: asymmetrical layout. Each tile sets its columns and how far it drops in index.html (--col, --drop). */
+@media (min-width: 821px) {
+  .projects { align-items: start; column-gap: clamp(32px, 5vw, 140px); row-gap: clamp(96px, 12vw, 336px); }
+  .projects .project { grid-column: var(--col, auto); margin-top: var(--drop, 0); }
+}
+
+/* The home intro splits words into inline-blocks, which don't inherit a link's underline. */
+.home-intro a .word { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.12em; }
+.project--soon .shot__frame video { scale: none !important; }
