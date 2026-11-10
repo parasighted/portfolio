@@ -243,6 +243,15 @@ h1, h2, h3, .lede, .case-tagline { text-wrap: balance; }
 .about__text a:hover { opacity: 0.7; }
 .about + .footer { padding-top: clamp(80px, 11vw, 308px); }
 
+/* Hover photo on the About name: a round photo that follows the mouse and flips like a coin (photo-coin.js). */
+.about__name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.12em; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); }
+.photo-coin { --size: clamp(150px, 13vw, 360px); position: fixed; left: 0; top: 0; z-index: 9000; width: var(--size); height: var(--size); perspective: calc(var(--size) * 5); pointer-events: none; opacity: 0; scale: 0.3; transition: opacity 0.25s ease, scale 0.5s cubic-bezier(.2, .9, .25, 1.25); }
+.photo-coin.is-open { opacity: 1; scale: 1; }
+.photo-coin__body { position: relative; display: block; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.75s cubic-bezier(.45, 0, .2, 1); }
+.photo-coin__face { position: absolute; inset: 0; border-radius: 50%; background: #000 center / cover no-repeat; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.photo-coin__face--back { transform: rotateY(180deg); }
+@media (max-width: 820px) { .photo-coin { --size: 140px; } }
+
 @media (max-width: 820px) {
   .about { width: calc(100% - 2 * var(--pad)); }
   .about__intro, .about__text { line-height: 1.2; }

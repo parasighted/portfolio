@@ -30,7 +30,7 @@
     try { if (sessionStorage.getItem("curtain") && !matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.add("has-curtain"); sessionStorage.removeItem("curtain"); } catch (e) {}
   })();
 </script>
-  <link rel="stylesheet" href="styles.css?v=74">
+  <link rel="stylesheet" href="styles.css?v=76">
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "35024aeadcce482c80758693d77d9112"}'></script>
 </head>
 <body>
@@ -49,7 +49,7 @@
 
   <main class="about">
 
-    <h1 class="about__intro serif">Hi! I’m Saloni Sinha, a multidisciplinary designer based in Oslo, currently working as a Lead Experience designer at <a class="link" href="https://www.frog.co/" target="_blank" rel="noopener">frog</a> Oslo.</h1>
+    <h1 class="about__intro serif">Hi! I’m <span class="about__name" data-photo-coin data-faces="assets/about/me-1.jpg?v=4,assets/about/me-2.jpg?v=2,assets/about/me-3.jpg">Saloni Sinha</span>, a multidisciplinary designer based in Oslo, currently working as a Lead Experience designer at <a class="link" href="https://www.frog.co/" target="_blank" rel="noopener">frog</a> Oslo.</h1>
 
     <section class="about__block reveal">
       <h2 class="about__label">My approach to design</h2>
@@ -113,5 +113,6 @@
 <script src="theme.js?v=73"></script>
 <script src="nav.js?v=72"></script>
 <script src="motion.js?v=75"></script>
+<script src="photo-coin.js?v=1"></script>
 </body>
 </html>
