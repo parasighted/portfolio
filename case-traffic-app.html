@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lock>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,9 +28,10 @@
     if (!t) t = "light";
     d.dataset.theme = t;
     if (!matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.add("has-curtain");
+    try { if (localStorage.getItem("case-access") !== "1c10c7b65f519db057a9e76425c227fdde6779fd9e2231e492382468cab94033") d.classList.add("is-locked"); } catch (e) { d.classList.add("is-locked"); }
   })();
 </script>
-  <link rel="stylesheet" href="styles.css?v=73">
+  <link rel="stylesheet" href="styles.css?v=74">
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "35024aeadcce482c80758693d77d9112"}'></script>
 </head>
 <body>
@@ -105,21 +106,17 @@
       <div class="col-content carousel reveal" data-carousel role="group" aria-roledescription="carousel" aria-label="UX analysis and benchmarking" tabindex="0">
         <div class="carousel__track">
           <figure class="carousel__slide">
-            <div class="shot__frame shot__frame--16x9"><img src="assets/cases/svv-assess-onboarding.jpg" width="2000" height="1125" loading="lazy" alt="UI assessment of the current onboarding, with key improvement areas"></div>
-            <figcaption>UI assessment of the current onboarding, with key improvement areas.</figcaption>
+            <div class="shot__frame shot__frame--natural"><img src="assets/cases/svv-assessment.jpg" width="2000" height="1311" loading="lazy" alt="UI assessment slides for onboarding and the home page, with a summary of opportunity areas"></div>
+            <figcaption>UI assessment of the current app and website, summarised into opportunity areas.</figcaption>
           </figure>
           <figure class="carousel__slide">
-            <div class="shot__frame shot__frame--16x9"><img src="assets/cases/svv-bench-vy.jpg" width="2000" height="1125" loading="lazy" alt="UI benchmark of the VY app with key takeaways and tags"></div>
-            <figcaption>Benchmarking VY: key takeaways and tags.</figcaption>
-          </figure>
-          <figure class="carousel__slide">
-            <div class="shot__frame shot__frame--16x9"><img src="assets/cases/svv-bench-nav.jpg" width="2000" height="1125" loading="lazy" alt="UI benchmark of the Nav website with key takeaways and tags"></div>
-            <figcaption>Benchmarking Nav: key takeaways and tags.</figcaption>
+            <div class="shot__frame shot__frame--natural"><img src="assets/cases/svv-benchmarking.jpg" width="2000" height="1365" loading="lazy" alt="UI benchmarking slides for Nav and VY, with the list of local, transport and cross-industry services reviewed"></div>
+            <figcaption>Benchmarking local services, transport apps and other industries.</figcaption>
           </figure>
         </div>
         <div class="carousel__bar">
           <button class="carousel__btn" type="button" aria-label="Previous image">←</button>
-          <span class="carousel__count" aria-live="polite">1 / 3</span>
+          <span class="carousel__count" aria-live="polite">1 / 2</span>
           <button class="carousel__btn" type="button" aria-label="Next image">→</button>
         </div>
       </div>
@@ -140,10 +137,18 @@
             <div class="shot__frame shot__frame--3x2"><img src="assets/cases/svv-moodboards.jpg" width="1968" height="1268" loading="lazy" alt="Mood boards from the workshop groups"></div>
             <figcaption>Mood boards from the four workshop groups, built from keywords and references.</figcaption>
           </figure>
+          <figure class="carousel__slide">
+            <div class="shot__frame shot__frame--natural shot__frame--flat"><img src="assets/cases/svv-approach-1.jpg" width="1761" height="1089" loading="lazy" alt="Approach 1 mood board: calm, Nordic and minimal, with neutral colours, clean interfaces and mountain photography"></div>
+            <figcaption>Approach 1: calm, Nordic and minimal, with neutral colours and an emphasis on data.</figcaption>
+          </figure>
+          <figure class="carousel__slide">
+            <div class="shot__frame shot__frame--natural shot__frame--flat"><img src="assets/cases/svv-approach-2.jpg" width="1763" height="1080" loading="lazy" alt="Approach 2 mood board: fresh and friendly, with rounded corners, vibrant colours and quirky illustrations"></div>
+            <figcaption>Approach 2: fresh and friendly, with rounded corners, vibrant colours and quirky illustrations.</figcaption>
+          </figure>
         </div>
         <div class="carousel__bar">
           <button class="carousel__btn" type="button" aria-label="Previous image">←</button>
-          <span class="carousel__count" aria-live="polite">1 / 2</span>
+          <span class="carousel__count" aria-live="polite">1 / 4</span>
           <button class="carousel__btn" type="button" aria-label="Next image">→</button>
         </div>
       </div>
@@ -209,8 +214,22 @@
         <p>Road status also had to read clearly on the map. Striped lines mark stretches with a status, such as closures, roadworks and risk of closure, while solid lines mark stretches without one, such as national tourist roads and private roads. Routes, blocked routes and ferry routes each have their own style, in both light and dark.</p>
       </div>
       <figure class="col-content shot reveal">
-        <button class="shot__frame shot__frame--natural lightbox-trigger" type="button" data-lightbox aria-label="Expand the map line styles image"><img src="assets/cases/svv-map-routes.jpg" width="2000" height="394" loading="lazy" alt="Overview of map line styles for stretches with and without status, routes and ferry routes, in light and dark maps"></button>
-        <figcaption>Map line styles for stretches and routes, in light and dark.</figcaption>
+        <div class="compare" data-compare style="aspect-ratio: 2000 / 855">
+          <img src="assets/cases/svv-map-routes-dark.jpg" width="2000" height="855" loading="lazy" alt="Six dark map screens showing a mountain pass, a route from A to B, a closed road, a ferry route, alternative routes and an open road">
+          <div class="compare__top">
+            <img src="assets/cases/svv-map-routes-light.jpg" width="2000" height="855" loading="lazy" alt="The same six map screens in light theme">
+          </div>
+        </div>
+        <figcaption>Drag to compare the map line styles in light and dark: status stretches, routes and ferry routes.</figcaption>
+      </figure>
+
+      <h2 class="col-label row__label reveal">Markers</h2>
+      <div class="col-content prose reveal">
+        <p>Map markers follow the same logic. Each one pairs a familiar road-sign icon with a label coloured by status, so closures, roadworks, mountain passes, ferries, height and length limits, rest areas and charging stations can be told apart at a glance, on both light and dark maps.</p>
+      </div>
+      <figure class="col-content shot reveal">
+        <div class="shot__frame shot__frame--natural"><img src="assets/cases/svv-map-markers.jpg" width="2000" height="1357" loading="lazy" alt="Map markers with status labels, such as Stengt, Veiarbeid, Hardangervidda, Døgnhvileplass and Ladestasjon, on a light and a dark map"></div>
+        <figcaption>Map markers and status labels, in light and dark.</figcaption>
       </figure>
 
       <h2 class="col-label row__label reveal">Key experiences</h2>
@@ -256,15 +275,10 @@
       </div>
 
       <dl class="col-content stats reveal">
-        <div><dt>Key experiences defined as templates</dt><dd class="serif">15+</dd></div>
-        <div><dt>Hybrid components developed in React</dt><dd class="serif">15+</dd></div>
-        <div><dt>Components designed, with variants for different states</dt><dd class="serif">40+</dd></div>
+        <div><dt>Components designed, with variants for different states and built to adapt across platforms</dt><dd class="serif">50+</dd></div>
+        <div><dt>Key experiences defined as templates, such as the map explorer, traffic messages and landing page concepts</dt><dd class="serif">15+</dd></div>
+        <div><dt>Hybrid components developed in React, scaled for all breakpoints and built on design tokens</dt><dd class="serif">15+</dd></div>
       </dl>
-
-      <blockquote class="col-content quote reveal">
-        <p class="lede serif">“The team helped us set up a robust component library, which made our sketches more realistic and significantly accelerated our workflow.”</p>
-        <footer>Julie Olssøn, Head of design, Fremkommelighetstjenester, Statens Vegvesen</footer>
-      </blockquote>
 
     </div>
   </main>
@@ -297,6 +311,7 @@
 
 </div>
 
+<script src="lock.js?v=1"></script>
 <script src="theme.js?v=72"></script>
 <script src="nav.js?v=72"></script>
 <script src="motion.js?v=75"></script>
