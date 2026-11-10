@@ -37,6 +37,8 @@ if (curtain && !noMotion) {
     if (url.pathname === location.pathname && url.hash) return;           // in-page anchors
     if (url.href === location.href) return;
     e.preventDefault();
+    try { sessionStorage.setItem("curtain", "1"); } catch (err) {}   // only page-to-page visits get the curtain, not the first load
+    root.classList.add("has-curtain");
     curtain.style.transition = "none";
     curtain.style.transform = "translateY(100%)";
     root.classList.remove("is-ready");

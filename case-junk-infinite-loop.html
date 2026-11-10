@@ -27,7 +27,7 @@
     try { t = localStorage.getItem("theme"); } catch (e) {}
     if (!t) t = "light";
     d.dataset.theme = t;
-    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.add("has-curtain");
+    try { if (sessionStorage.getItem("curtain") && !matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.add("has-curtain"); sessionStorage.removeItem("curtain"); } catch (e) {}
   })();
 </script>
   <link rel="stylesheet" href="styles.css?v=74">
@@ -201,7 +201,7 @@
 
 </div>
 
-<script src="theme.js?v=72"></script>
+<script src="theme.js?v=73"></script>
 <script src="nav.js?v=72"></script>
 <script src="motion.js?v=75"></script>
 </body>
