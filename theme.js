@@ -22,7 +22,10 @@ if (toggle) toggle.addEventListener("click", () => {
 /* ---- Page curtain ---- */
 const curtain = document.querySelector(".page-curtain");
 const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-function lift() { root.classList.add("is-ready"); }
+// once lifted, take the curtain out of the layout: iPhone Safari tints its toolbars from fixed layers at the screen edge
+let hideTimer;
+function hideCurtain() { clearTimeout(hideTimer); hideTimer = setTimeout(() => { curtain.style.display = "none"; }, 950); }
+function lift() { root.classList.add("is-ready"); if (curtain) hideCurtain(); }
 if (curtain && !noMotion) {
   // lift once the page is ready (or after 1.2s at the latest)
   const ready = new Promise((r) => (document.readyState === "complete" ? r() : window.addEventListener("load", r, { once: true })));
@@ -39,6 +42,8 @@ if (curtain && !noMotion) {
     e.preventDefault();
     try { sessionStorage.setItem("curtain", "1"); } catch (err) {}   // only page-to-page visits get the curtain, not the first load
     root.classList.add("has-curtain");
+    clearTimeout(hideTimer);
+    curtain.style.display = "";
     curtain.style.transition = "none";
     curtain.style.transform = "translateY(100%)";
     root.classList.remove("is-ready");
@@ -51,7 +56,7 @@ if (curtain && !noMotion) {
 
   // coming back with the back button (page restored from cache): lift the curtain again
   window.addEventListener("pageshow", (e) => {
-    if (e.persisted) { curtain.removeAttribute("style"); curtain.querySelector("span").removeAttribute("style"); root.classList.add("is-ready"); }
+    if (e.persisted) { curtain.removeAttribute("style"); curtain.querySelector("span").removeAttribute("style"); lift(); }
   });
 } else if (curtain) {
   curtain.remove();
