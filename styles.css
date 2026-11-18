@@ -960,3 +960,5 @@ html:not([data-theme="dark"]) .nav:not(.nav--light) :focus-visible { outline-col
   .exp { grid-template-columns: 1fr; }
   .exp__text { position: static; }
 }
+.exp__link { justify-self: start; color: var(--green); text-decoration: underline; text-underline-offset: 4px; }
+.exp__link:hover { text-decoration-thickness: 2px; }
