@@ -91,7 +91,7 @@ if (!reduceMotion) {
             if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
             const w = document.createElement("span");
             w.className = "word"; w.setAttribute("aria-hidden", "true");
-            w.style.animationDelay = `${((document.documentElement.classList.contains("has-curtain") ? 0.75 : 0.08) + i++ * 0.045).toFixed(2)}s`;
+            w.style.animationDelay = `${((document.documentElement.classList.contains("has-curtain") ? 0.35 : 0.08) + i++ * 0.045).toFixed(2)}s`;
             w.textContent = part;
             frag.appendChild(w);
           });

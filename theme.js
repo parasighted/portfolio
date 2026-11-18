@@ -21,10 +21,11 @@ if (toggle) toggle.addEventListener("click", () => {
 
 /* ---- Page curtain ---- */
 const curtain = document.querySelector(".page-curtain");
+const bands = curtain ? [...curtain.querySelectorAll("i")] : [];
 const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 // once lifted, take the curtain out of the layout: iPhone Safari tints its toolbars from fixed layers at the screen edge
 let hideTimer;
-function hideCurtain() { clearTimeout(hideTimer); hideTimer = setTimeout(() => { curtain.style.display = "none"; }, 950); }
+function hideCurtain() { clearTimeout(hideTimer); hideTimer = setTimeout(() => { curtain.style.display = "none"; }, 800); }
 function lift() { root.classList.add("is-ready"); if (curtain) hideCurtain(); }
 if (curtain && !noMotion) {
   // lift once the page is ready (or after 1.2s at the latest)
@@ -44,19 +45,22 @@ if (curtain && !noMotion) {
     root.classList.add("has-curtain");
     clearTimeout(hideTimer);
     curtain.style.display = "";
-    curtain.style.transition = "none";
-    curtain.style.transform = "translateY(100%)";
     root.classList.remove("is-ready");
-    void curtain.offsetHeight;
-    curtain.style.transition = "transform 0.6s cubic-bezier(.77, 0, .18, 1)";
-    curtain.style.transform = "translateY(0)";
-    curtain.querySelector("span").style.opacity = "1";
-    setTimeout(() => { location.href = a.href; }, 620);
+    // bands sweep in from the left, one after another
+    bands.forEach((b, i) => {
+      b.style.transition = "none";
+      b.style.transformOrigin = "left center";
+      b.style.transform = "scaleX(0)";
+      void b.offsetWidth;
+      b.style.transition = `transform 0.5s cubic-bezier(.16, 1, .3, 1) ${i * 0.05}s`;
+      b.style.transform = "scaleX(1)";
+    });
+    setTimeout(() => { location.href = a.href; }, 560);
   });
 
   // coming back with the back button (page restored from cache): lift the curtain again
   window.addEventListener("pageshow", (e) => {
-    if (e.persisted) { curtain.removeAttribute("style"); curtain.querySelector("span").removeAttribute("style"); lift(); }
+    if (e.persisted) { curtain.removeAttribute("style"); bands.forEach((b) => b.removeAttribute("style")); lift(); }
   });
 } else if (curtain) {
   curtain.remove();

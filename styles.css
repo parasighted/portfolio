@@ -4,6 +4,7 @@
   /* Design tokens: names match the Figma variables on the "Design System" page */
   --color-purple: #4a00b9;
   --color-green: #005e16;
+  --color-black: #000000;
   --color-white: #ffffff;
   --color-hero-scrim: rgba(0, 0, 0, 0.2);
   --color-hover-overlay: rgba(24, 24, 27, 0.62);
@@ -11,9 +12,10 @@
   --radius-note: 14px;
 
   /* semantic tokens: these switch between light and dark (same names as the Figma variables) */
-  --color-fg: var(--color-purple);
+  --color-fg: var(--color-black);
   --color-bg: var(--color-white);
-  --color-accent: var(--color-green);
+  --color-accent: var(--color-purple);       /* links */
+  --color-muted: #737373;                     /* sub texts: 4.7:1 on white, passes WCAG AA */
 
   /* short aliases used throughout this file */
   --purple: var(--color-fg);
@@ -174,7 +176,7 @@ figure.shot { display: grid; gap: 10px; }
 .project { display: block; }
 .project .shot__frame { aspect-ratio: 1293 / 602; }
 .project h2 { font-size: var(--t-title); margin-top: 17px; }
-.project p { font-size: clamp(16px, 1.67vw, 47px); font-weight: 400; margin-top: 12px; }
+.project p { font-size: clamp(16px, 1.67vw, 47px); font-weight: 400; margin-top: 12px; color: var(--color-muted); }
 .archive { padding: var(--section-gap) var(--pad) 0; }
 .archive span { display: block; font-size: var(--t-label); margin-bottom: 8px; }
 .archive h2 { font-size: var(--t-title); }
@@ -322,7 +324,7 @@ h1, h2, h3, .lede, .case-tagline { text-wrap: balance; }
 .cv-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 0.6em; font-size: var(--t-body); }
 .cv-tags li { padding: 0.4em 1em; border: 1px solid color-mix(in srgb, currentColor 30%, transparent); border-radius: 999px; line-height: 1.3; }
 .cv-rows { list-style: none; font-size: var(--t-body); line-height: 1.45; }
-.cv-rows li { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding-block: 0.85em; border-bottom: 1px solid var(--cv-rule); }
+.cv-rows li { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding-block: 0.85em; }
 .cv-rows li:first-child { padding-top: 0; }
 .cv-rows li span:last-child { flex-shrink: 0; opacity: 0.7; font-variant-numeric: tabular-nums; }
 
@@ -503,6 +505,7 @@ html[data-theme="dark"] {
   --color-fg: #ffffff;
   --color-bg: #202a32;
   --color-accent: #b3a6d9;
+  --color-muted: #939ba2;                     /* 5.2:1 on the dark background */
   --color-image-placeholder: #2a353e;
 }
 html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after {
@@ -558,23 +561,30 @@ html[data-theme="dark"] .theme-toggle:hover .theme-toggle__knob { transform: tra
   html.theme-anim .theme-toggle__knob svg { transition: opacity 0.3s ease, transform 0.5s cubic-bezier(.3, .7, .2, 1), stroke 0.45s ease, fill 0.45s ease !important; }
 }
 
-/* ---------- Page curtain (page-to-page transition) ---------- */
+/* ---------- Page curtain (page-to-page transition) ----------
+   Four black bands. Leaving a page they sweep in from the left one after another; on the new page they sweep out to the right. */
 .page-curtain {
   position: fixed;
   inset: 0;
   z-index: 200;
   display: none;
-  place-items: center;
-  background: var(--color-purple);
-  color: var(--color-white);
-  transform: translateY(-100%);
+  flex-direction: column;
   pointer-events: none;
 }
-.page-curtain span { font-size: clamp(24px, 2.6vw, 73px); opacity: 0; transition: opacity 0.4s ease; }
-.has-curtain .page-curtain { display: grid; transform: translateY(0); }
-.has-curtain .page-curtain span { opacity: 1; }
-.has-curtain.is-ready .page-curtain { transform: translateY(-100%); transition: transform 0.9s cubic-bezier(.77, 0, .18, 1); }
-.has-curtain.is-ready .page-curtain span { opacity: 0; }
+.page-curtain i {
+  display: block;
+  flex: 1;
+  margin-bottom: -1px;                          /* no hairline gaps between bands */
+  background: var(--color-black);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.has-curtain .page-curtain { display: flex; }
+.has-curtain .page-curtain i { transform: scaleX(1); }
+.has-curtain.is-ready .page-curtain i { transform: scaleX(0); transform-origin: right center; transition: transform 0.55s cubic-bezier(.16, 1, .3, 1); }
+.has-curtain.is-ready .page-curtain i:nth-child(2) { transition-delay: 0.05s; }
+.has-curtain.is-ready .page-curtain i:nth-child(3) { transition-delay: 0.1s; }
+.has-curtain.is-ready .page-curtain i:nth-child(4) { transition-delay: 0.15s; }
 
 @media (prefers-reduced-motion: reduce) { .page-curtain { display: none !important; } }
 
@@ -635,7 +645,7 @@ html[data-theme="dark"] .theme-toggle:hover .theme-toggle__knob { transform: tra
 .play .shot__frame img { height: 100%; }
 .play__item figcaption { display: grid; gap: 2px; padding-inline: clamp(6px, 1vw, 28px); }
 .play__title { font-size: clamp(18px, 1.5vw, 42px); line-height: 1.25; }
-.play__meta { font-size: 14px; opacity: 0.8; }
+.play__meta { font-size: 14px; color: var(--color-muted); }
 .play__item--wide { width: 100%; margin-top: clamp(64px, 9vw, 252px); }
 .play + .footer { padding-top: clamp(72px, 9vw, 252px); }
 
@@ -695,7 +705,7 @@ html[data-theme="dark"] .theme-toggle:hover .theme-toggle__knob { transform: tra
 .compare__top { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
 .compare__label { position: absolute; left: 12px; bottom: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(17, 17, 17, 0.72); color: #fff; font-size: 13px; line-height: 1.3; pointer-events: none; }
 .compare__label--end { left: auto; right: 12px; }
-.compare__handle { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: var(--color-purple); pointer-events: none; }
+.compare__handle { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: var(--color-fg); pointer-events: none; }
 /* No shadows: a hairline edge keeps the white line and handle visible on white images */
 .compare__knob { position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: #fff; color: #111; border: 1px solid rgba(0, 0, 0, 0.18); transform: translate(-50%, -50%); transition: transform 0.2s ease; }
 .compare.is-dragging .compare__knob { transform: translate(-50%, -50%) scale(1.08); }
@@ -736,7 +746,7 @@ html[data-theme="dark"] .theme-toggle:hover .theme-toggle__knob { transform: tra
 
 /* Custom cursor (mouse only, added by motion.js): a dot that shrinks over clickable things and says "View project" on home tiles. */
 html.has-cursor, html.has-cursor * { cursor: none !important; }
-.cursor { --cursor-color: var(--color-purple); position: fixed; top: 0; left: 0; z-index: 10000; width: 0; height: 0; pointer-events: none; opacity: 0; will-change: translate; transition: opacity 0.2s ease; }
+.cursor { --cursor-color: var(--color-fg); position: fixed; top: 0; left: 0; z-index: 10000; width: 0; height: 0; pointer-events: none; opacity: 0; will-change: translate; transition: opacity 0.2s ease; }
 html[data-theme="dark"] .cursor { --cursor-color: var(--color-accent); }
 .cursor.is-visible { opacity: 1; }
 .cursor__dot { position: absolute; top: -12px; left: -12px; width: 24px; height: 24px; border-radius: 50%; background: var(--cursor-color); transition: scale 0.2s ease, background-color 0.2s ease; }
@@ -745,8 +755,8 @@ html[data-theme="dark"] .cursor { --cursor-color: var(--color-accent); }
 .cursor.is-labelled .cursor__label { opacity: 1; }
 /* Tones set by motion.js from what's behind the cursor */
 .cursor.is-on-dark .cursor__dot { background: #fff; }
-.cursor.is-on-light .cursor__dot { background: var(--color-purple); }
-.cursor.is-on-light .cursor__label { color: var(--color-purple); }
+.cursor.is-on-light .cursor__dot { background: var(--color-black); }
+.cursor.is-on-light .cursor__label { color: var(--color-black); }
 /* "Coming soon": a spinning multicolour wait dot */
 .cursor.is-soon .cursor__dot { background: conic-gradient(#ff5f6d, #ffb347, #ffe259, #5ed36b, #3fb8ff, #8a6cff, #ff5fc4, #ff5f6d); animation: cursor-spin 1.1s linear infinite; }
 @keyframes cursor-spin { to { rotate: 360deg; } }
@@ -906,3 +916,16 @@ html[data-theme="dark"] .lock__error { color: #ff8a8a; }
   .lock__inner { width: 100%; margin-left: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .lock__form.is-wrong { animation: none; } .lock.is-leaving { transition: none; } }
+
+/* ---------- Nav inverts over what's behind it (light mode) ----------
+   White text with a "difference" blend shows black over the white page and white over dark images,
+   so nav text stays readable wherever it overlaps a tile. The current-page link uses purple's inverse
+   (#b5ff46) so it still reads as purple over the page. */
+html:not([data-theme="dark"]) .nav:not(.nav--light),
+html.is-locked:not([data-theme="dark"]) .nav:not(.nav--light) { color: #fff; mix-blend-mode: difference; }
+html:not([data-theme="dark"]) .nav:not(.nav--light) a[aria-current="page"] { color: #b5ff46; }
+html:not([data-theme="dark"]) .nav:not(.nav--light) :focus-visible { outline-color: #b5ff46; }
+/* over a case hero the nav stays plain white: the photos are mid-tones, where inverting reads poorly */
+/* the nav blends inside .page (its own stacking context), so .page needs the page colour behind it */
+.page { background: var(--color-bg); }
+@media (forced-colors: active) { .nav { mix-blend-mode: normal !important; } }
