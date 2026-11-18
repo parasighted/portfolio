@@ -938,7 +938,6 @@ html:not([data-theme="dark"]) .nav:not(.nav--light) :focus-visible { outline-col
   padding-block: clamp(32px, 4.5vw, 126px); border-bottom: 1px solid currentColor;
 }
 .exp__text { display: grid; align-content: start; gap: clamp(10px, 1vw, 28px); position: sticky; top: clamp(88px, 8vw, 224px); }
-.exp__num { font-size: var(--t-label); color: var(--color-muted); font-variant-numeric: tabular-nums; }
 .exp__title { font-size: var(--t-title); line-height: 1.1; font-weight: 300; font-variation-settings: "SOFT" 0, "WONK" 1; }
 .exp__desc { max-width: 42ch; text-wrap: pretty; }
 .exp__meta { font-size: var(--t-label); color: var(--color-muted); }
