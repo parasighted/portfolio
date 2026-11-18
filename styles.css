@@ -204,8 +204,9 @@ figure.shot { display: grid; gap: 10px; }
 }
 
 @media (max-width: 600px) {
-  .nav { font-size: 16px; }   /* 20px would not fit name + four links on a phone */
-  .nav ul { gap: 14px; }
+  .nav { font-size: 16px; flex-wrap: wrap; row-gap: 2px; }   /* name + five links don't fit one line on a phone: links wrap below the name */
+  .nav ul { gap: 14px; align-items: center; }
+  .page:not(:has(.hero)) { padding-top: 36px; }   /* room for the two-line nav; case heroes still sit behind it */
   .nav > a { white-space: nowrap; }
   .footer { flex-direction: column; align-items: flex-start; }
 }
@@ -929,3 +930,34 @@ html:not([data-theme="dark"]) .nav:not(.nav--light) :focus-visible { outline-col
 /* the nav blends inside .page (its own stacking context), so .page needs the page colour behind it */
 .page { background: var(--color-bg); }
 @media (forced-colors: active) { .nav { mix-blend-mode: normal !important; } }
+
+/* ---------- Experiments: a numbered list, text on the left and a looping recording on the right ---------- */
+.exps__list { margin-top: clamp(56px, 7vw, 196px); border-top: 1px solid currentColor; }
+.exp {
+  display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(24px, 4vw, 112px);
+  padding-block: clamp(32px, 4.5vw, 126px); border-bottom: 1px solid currentColor;
+}
+.exp__text { display: grid; align-content: start; gap: clamp(10px, 1vw, 28px); position: sticky; top: clamp(88px, 8vw, 224px); }
+.exp__num { font-size: var(--t-label); color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.exp__title { font-size: var(--t-title); line-height: 1.1; font-weight: 300; font-variation-settings: "SOFT" 0, "WONK" 1; }
+.exp__desc { max-width: 42ch; text-wrap: pretty; }
+.exp__meta { font-size: var(--t-label); color: var(--color-muted); }
+.exp__media { position: relative; }
+.exp__media .shot__frame { border-radius: clamp(12px, 1.4vw, 40px); overflow: hidden; width: 100%; }
+.exp__media video { object-fit: cover; }
+.exp__sound {
+  position: absolute; right: clamp(10px, 1.2vw, 32px); bottom: clamp(10px, 1.2vw, 32px);
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px 8px 10px; border: 0; border-radius: 999px;
+  font: 400 14px/1 var(--sans); color: var(--color-white); background: var(--color-hover-overlay);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); cursor: pointer;
+}
+.exp__sound svg { width: 20px; height: 20px; }
+.exp__sound .on, .exp__sound[aria-pressed="true"] .off { display: none; }
+.exp__sound[aria-pressed="true"] .on { display: inline; }
+.exp__sound:focus-visible { outline: 2px solid var(--color-white); outline-offset: 2px; }
+.exps + .footer { padding-top: clamp(72px, 9vw, 252px); }
+
+@media (max-width: 820px) {
+  .exp { grid-template-columns: 1fr; }
+  .exp__text { position: static; }
+}

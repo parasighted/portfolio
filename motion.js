@@ -421,3 +421,23 @@ document.querySelectorAll("[data-carousel]").forEach((root) => {
   window.addEventListener("scroll", queue, { passive: true, capture: true });   // the page or a carousel moved under the mouse
   document.documentElement.addEventListener("mouseleave", () => cursor.classList.remove("is-visible"));
 })();
+
+/* Experiments: each recording plays silently; its button turns sound on. Only one plays with sound at a time. */
+document.querySelectorAll(".exp__sound").forEach((btn) => {
+  const video = btn.parentElement.querySelector("video");
+  const label = btn.querySelector("span");
+  const name = btn.getAttribute("aria-label").replace("Turn on sound for ", "");
+  const set = (on) => {
+    video.muted = !on;
+    btn.setAttribute("aria-pressed", String(on));
+    btn.setAttribute("aria-label", `${on ? "Turn off" : "Turn on"} sound for ${name}`);
+    label.textContent = on ? "Mute" : "Sound on";
+  };
+  btn.addEventListener("click", () => {
+    const on = video.muted;
+    if (on) document.querySelectorAll(".exp__sound[aria-pressed='true']").forEach((b) => b !== btn && b.click());
+    set(on);
+    if (on && video.paused) { const p = video.play(); if (p) p.catch(() => {}); }
+  });
+  video.addEventListener("pause", () => { if (!video.muted) set(false); });   // scrolled away: go quiet again
+});
