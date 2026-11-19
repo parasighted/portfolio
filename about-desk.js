@@ -7,7 +7,21 @@
   const wins = [...desk.querySelectorAll(".win")];
   const chipsBox = main.querySelector(".desk-chips");
   const wide = window.matchMedia("(min-width: 821px)");
-  const BASE_W = 1280;
+
+  // Wide screens: lay the windows out on a stage of a fixed design width and scale the whole stage up,
+  // so a big monitor shows the same composition as a laptop, just bigger. Past MAX_K the stage widens instead.
+  const DESIGN_W = 1360, MAX_K = 1.9;
+  const stage = document.createElement("div");
+  stage.className = "desk__stage";
+  wins.forEach((win) => stage.appendChild(win));
+  desk.appendChild(stage);
+  let k = 1;
+  const stageW = () => desk.clientWidth / k;               // layout width in stage units
+  function rescale() {
+    k = Math.min(MAX_K, Math.max(1, desk.clientWidth / DESIGN_W));
+    stage.style.width = stageW() + "px";
+    stage.style.transform = k === 1 ? "" : `scale(${k})`;
+  }
 
   // Tidy layout: three columns, tops of the first row lined up, each window stacked a dot or so below the one above.
   // `at` places a window across the free space in its row: 0 = left edge, 1 = right edge.
@@ -18,7 +32,7 @@
   ];
   const PAD = 26;
 
-  let top = wins.length, deskW = BASE_W, live = false, moved = false;
+  let top = wins.length, deskW = DESIGN_W, live = false, moved = false;
   const pos = {};
 
   // Chips, one per window
@@ -53,7 +67,8 @@
   const byId = Object.fromEntries(wins.map((win) => [win.dataset.win, win]));
 
   function layout() {
-    const W = desk.clientWidth;
+    rescale();
+    const W = stageW();
     columns.forEach((col) => {
       let y = snap(PAD);
       col.forEach(({ id, at, w: slot }) => {
@@ -76,7 +91,9 @@
   function fitHeight() {
     let h = 0;
     wins.forEach((win) => { if (!win.hidden) h = Math.max(h, pos[win.dataset.win].y + win.offsetHeight); });
-    desk.style.height = Math.max(h + 60, 600) + "px";
+    const stageH = Math.max(h + 60, 600);
+    stage.style.height = stageH + "px";
+    desk.style.height = stageH * k + "px";
   }
 
   function setOpen(win, open) {
@@ -98,12 +115,12 @@
     e.preventDefault();
     const id = win.dataset.win, w = widthOf(win);
     const start = { mx: e.clientX, my: e.clientY, x: pos[id].x, y: pos[id].y };
-    const W = desk.clientWidth, H = desk.clientHeight;
+    const W = stageW(), H = desk.clientHeight / k;
     win.classList.add("is-drag");
     const move = (ev) => {
-      pos[id] = {
-        x: Math.round(Math.max(-w + 80, Math.min(start.x + ev.clientX - start.mx, W - 80))),
-        y: Math.round(Math.max(0, Math.min(start.y + ev.clientY - start.my, H - 44)))
+      pos[id] = {                                           // pointer moves in screen pixels, windows in stage units
+        x: Math.round(Math.max(-w + 80, Math.min(start.x + (ev.clientX - start.mx) / k, W - 80))),
+        y: Math.round(Math.max(0, Math.min(start.y + (ev.clientY - start.my) / k, H - 44)))
       };
       place(win);
     };
@@ -154,7 +171,8 @@
     desk.classList.toggle("is-live", on);
     if (on) layout();
     else {
-      desk.style.height = "";
+      desk.style.height = stage.style.height = stage.style.width = stage.style.transform = "";
+      k = 1;
       wins.forEach((win) => { win.hidden = false; win.style.left = win.style.top = win.style.zIndex = ""; chips[win.dataset.win].setAttribute("aria-pressed", "true"); });
     }
   }
@@ -162,15 +180,18 @@
   // Keep windows in proportion when the desk changes width
   window.addEventListener("resize", () => {
     if (!live) return;
-    const W = desk.clientWidth;
-    if (Math.abs(W - deskW) < 4) return;
     if (!moved) { layout(); return; }                       // untouched desk: redo the tidy layout
-    wins.forEach((win) => {
-      const p = pos[win.dataset.win], w = widthOf(win);
-      p.x = snapIn(p.x * W / deskW, 12, W - w - 12);
-      place(win);
-    });
-    deskW = W;
+    rescale();
+    const W = stageW();
+    if (Math.abs(W - deskW) >= 4) {                         // stage width only changes outside the scaling range
+      wins.forEach((win) => {
+        const p = pos[win.dataset.win], w = widthOf(win);
+        p.x = snapIn(p.x * W / deskW, 12, W - w - 12);
+        place(win);
+      });
+      deskW = W;
+    }
+    fitHeight();
   });
 
   wide.addEventListener("change", (e) => setLive(e.matches));
