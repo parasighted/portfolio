@@ -18,12 +18,12 @@ html[data-theme="dark"] .about-desk { --win-bg: #26323b; --dot: rgba(255, 255, 2
 .desk-chip--tidy:hover { background: var(--color-fg); opacity: 0.85; }
 
 .desk-wrap { width: calc(100% - 2 * clamp(18px, 3vw, 60px)); max-width: 2400px; margin: 0 auto; }
-.desk { position: relative; display: flex; flex-direction: column; gap: 16px; padding: 16px; border-radius: 26px; background-color: color-mix(in srgb, var(--color-fg) 3%, var(--color-bg)); }
+.desk { position: relative; display: flex; flex-direction: column; gap: 16px; padding: 16px; border-radius: 20px; background-color: color-mix(in srgb, var(--color-fg) 3%, var(--color-bg)); }
 .desk.is-live { display: block; padding: 0; overflow: hidden; }
 .desk__stage { display: contents; }   /* stacked list: windows behave as direct children of the desk */
 .desk.is-live .desk__stage { display: block; position: absolute; left: 0; top: 0; transform-origin: 0 0; background-image: radial-gradient(var(--dot) 1.2px, transparent 1.4px); background-size: 26px 26px; }
 
-.win { background: var(--win-bg); color: var(--color-fg); border: 1px solid var(--color-fg); border-radius: 14px; overflow: hidden; box-shadow: 0 14px 34px -18px var(--shadow); }
+.win { background: var(--win-bg); color: var(--color-fg); border: 1px solid var(--color-fg); border-radius: 11px; overflow: hidden; box-shadow: 0 14px 34px -18px var(--shadow); }
 .desk:not(.is-live) .win { width: auto !important; }
 .about-desk:not(.is-live) .desk-bar__hint { display: none; }
 .desk.is-live .win { position: absolute; transition: box-shadow 0.25s ease, transform 0.25s ease; animation: win-pop 0.5s cubic-bezier(0.2, 0.9, 0.25, 1.2) both; }
