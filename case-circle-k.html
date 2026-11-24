@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lock>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Circle K – Home Charging Research & Scalable Design System – Saloni Sinha</title>
-  <meta name="description" content="Circle K: research into EV home charging and a scalable design system across web and mobile. Case study by Saloni Sinha.">
-  <meta name="robots" content="noindex">
+  <title>Circle K – Lightning Design System – Saloni Sinha</title>
+  <meta name="description" content="Circle K: the Lightning Design System, bringing fuel and EV into one accessible, themeable design language across web and mobile. Case study by Saloni Sinha.">
   <link rel="canonical" href="https://salonisinha.com/case-circle-k">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Saloni Sinha">
   <meta property="og:locale" content="en_GB">
-  <meta property="og:title" content="Circle K – Home Charging Research &amp; Scalable Design System – Saloni Sinha">
-  <meta property="og:description" content="Circle K: research into EV home charging and a scalable design system across web and mobile. Case study by Saloni Sinha.">
+  <meta property="og:title" content="Circle K – Lightning Design System – Saloni Sinha">
+  <meta property="og:description" content="Circle K: the Lightning Design System, bringing fuel and EV into one accessible, themeable design language across web and mobile. Case study by Saloni Sinha.">
   <meta property="og:url" content="https://salonisinha.com/case-circle-k">
   <meta property="og:image" content="https://salonisinha.com/assets/og/circle-k.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Circle K website and design system foundations">
   <meta name="twitter:card" content="summary_large_image">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "CreativeWork", "url": "https://salonisinha.com/case-circle-k", "name": "Circle K", "description": "Circle K: research into EV home charging and a scalable design system across web and mobile. Case study by Saloni Sinha.", "image": "https://salonisinha.com/assets/og/circle-k.jpg", "author": {"@id": "https://salonisinha.com/#person"}}, {"@type": "Person", "@id": "https://salonisinha.com/#person", "name": "Saloni Sinha", "url": "https://salonisinha.com/", "jobTitle": "Lead Experience Designer", "worksFor": {"@type": "Organization", "name": "frog", "url": "https://www.frog.co/"}, "address": {"@type": "PostalAddress", "addressLocality": "Oslo", "addressCountry": "NO"}, "sameAs": ["https://dribbble.com/salonisinha", "https://medium.com/@saloni.sinha", "https://www.instagram.com/parasighted_saloni", "https://open.spotify.com/artist/5cFTWnOfKohVWJ9EROng08"]}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "CreativeWork", "url": "https://salonisinha.com/case-circle-k", "name": "Circle K", "description": "Circle K: the Lightning Design System, bringing fuel and EV into one accessible, themeable design language across web and mobile. Case study by Saloni Sinha.", "image": "https://salonisinha.com/assets/og/circle-k.jpg", "author": {"@id": "https://salonisinha.com/#person"}}, {"@type": "Person", "@id": "https://salonisinha.com/#person", "name": "Saloni Sinha", "url": "https://salonisinha.com/", "jobTitle": "Lead Experience Designer", "worksFor": {"@type": "Organization", "name": "frog", "url": "https://www.frog.co/"}, "address": {"@type": "PostalAddress", "addressLocality": "Oslo", "addressCountry": "NO"}, "sameAs": ["https://dribbble.com/salonisinha", "https://medium.com/@saloni.sinha", "https://www.instagram.com/parasighted_saloni", "https://open.spotify.com/artist/5cFTWnOfKohVWJ9EROng08"]}]}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0,1&family=Inter:wght@300;400&display=swap" rel="stylesheet">
@@ -29,6 +28,7 @@
     if (!t) t = "light";
     d.dataset.theme = t;
     try { if (sessionStorage.getItem("curtain") && !matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.add("has-curtain"); sessionStorage.removeItem("curtain"); } catch (e) {}
+    try { if (localStorage.getItem("case-access") !== "1c10c7b65f519db057a9e76425c227fdde6779fd9e2231e492382468cab94033") d.classList.add("is-locked"); } catch (e) { d.classList.add("is-locked"); }
   })();
 </script>
   <link rel="stylesheet" href="styles.css?v=94">
@@ -55,68 +55,199 @@
   <main>
     <section class="grid case-head">
       <h1 class="col-label case-title serif">Circle K</h1>
-      <p class="col-content case-tagline serif">Home Charging Research &amp; Scalable Design System</p>
+      <p class="col-content case-tagline serif">Lightning Design System</p>
 
       <dl class="col-label meta">
         <div><dt>Client</dt><dd>Circle K, frog</dd></div>
+        <div><dt>Year</dt><dd>2023–2024</dd></div>
         <div><dt>Platforms</dt><dd>Web and mobile</dd></div>
         <div><dt>Team</dt><dd>Product, marketing and development</dd></div>
         <div><dt>My role</dt><dd>Experience Design Consultant: User research, UX, Design system</dd></div>
       </dl>
       <div class="col-content case-intro">
         <div class="prose">
-          <p>Research into how customers experience EV home charging and B2B ordering at Circle K, and the evolution of the design system behind its web and mobile products.</p>
-          <p>Working with product, marketing and development teams, I led the user research and helped turn the findings into clearer flows and a more scalable, accessible foundation.</p>
+          <p>Circle K’s digital touchpoints had grown apart. The website, the EV charging pages, the web shop and the apps each spoke a slightly different visual language, and fuel and EV customers could easily mistake them for different brands.</p>
+          <p>We researched how people actually moved through these products, then built the Lightning Design System: one modular, accessible design language for B2C and B2B, with themes and light and dark modes built in.</p>
         </div>
       </div>
     </section>
 
     <div class="grid case-body">
 
-      <h2 class="col-label row__label reveal">Background</h2>
+      <h2 class="col-label row__label reveal">Challenge</h2>
       <div class="col-content prose reveal">
-        <p>Circle K wanted to improve the digital experience for its EV home charging customers and B2B users. Usability gaps, inconsistent experiences and fragmented design patterns were getting in the way across platforms.</p>
-        <p>There were two sides to the challenge: understanding customer needs better, and evolving the digital ecosystem into something more scalable, accessible and aligned with the brand across web and mobile.</p>
+        <p>We started with an audit of the current touchpoints: circlek.no, the EV charging pages, the web shop, and the transit and home charging apps. The same patterns kept coming up. Type styles, buttons, icons and illustrations varied from product to product, red was used for almost everything, and some colour combinations failed accessibility rules, which can also mean real fines.</p>
+        <p>Navigation was a problem too. Most visitors reach the EV pages from search, but the logo sends them to circlek.no, which looks and works differently.</p>
       </div>
 
-      <p class="col-content lede serif reveal">How might we better understand <span class="lede__accent">home charging customers</span> while evolving a digital ecosystem that can scale across web and mobile?</p>
+      <div class="col-content carousel reveal" data-carousel role="group" aria-roledescription="carousel" aria-label="Audit of the current touchpoints" tabindex="0">
+        <div class="carousel__track">
+          <figure class="carousel__slide">
+            <div class="shot__frame shot__frame--flat" style="aspect-ratio: 1244 / 1020"><img src="assets/cases/ck-audit-005.jpg" width="1244" height="1020" loading="lazy" alt="The Gotham weight range, annotated across a coffee campaign and app screens"></div>
+            <figcaption>Typography: marketing leans on the heaviest Gotham weights, while digital needs fewer, calmer ones.</figcaption>
+          </figure>
+          <figure class="carousel__slide">
+            <div class="shot__frame shot__frame--flat" style="aspect-ratio: 1244 / 1020"><img src="assets/cases/ck-audit-007.jpg" width="1244" height="1020" loading="lazy" alt="A colour contrast check failing WCAG on orange campaign tiles"></div>
+            <figcaption>Contrast: white text on the brand orange fails WCAG AA.</figcaption>
+          </figure>
+          <figure class="carousel__slide">
+            <div class="shot__frame shot__frame--flat" style="aspect-ratio: 1244 / 1020"><img src="assets/cases/ck-audit-008.jpg" width="1244" height="1020" loading="lazy" alt="Button styles from the website, web shop, home charger and business pages, each different"></div>
+            <figcaption>Buttons: corners, weights and casing change from one touchpoint to the next.</figcaption>
+          </figure>
+          <figure class="carousel__slide">
+            <div class="shot__frame shot__frame--flat" style="aspect-ratio: 1244 / 1020"><img src="assets/cases/ck-audit-009.jpg" width="1244" height="1020" loading="lazy" alt="Web banners, hyperlinks, app components and negative actions all in red"></div>
+            <figcaption>Red everywhere: banners, links, components and negative actions all share one colour.</figcaption>
+          </figure>
+          <figure class="carousel__slide">
+            <div class="shot__frame shot__frame--flat" style="aspect-ratio: 1244 / 1020"><img src="assets/cases/ck-audit-010.jpg" width="1244" height="1020" loading="lazy" alt="Icon sets from the website, app and EV guidelines in different styles"></div>
+            <figcaption>Iconography: different stroke weights, colours and levels of detail.</figcaption>
+          </figure>
+          <figure class="carousel__slide">
+            <div class="shot__frame shot__frame--flat" style="aspect-ratio: 1244 / 1020"><img src="assets/cases/ck-audit-013.jpg" width="1244" height="1020" loading="lazy" alt="The circlek.no and EV charging headers side by side, with different menus"></div>
+            <figcaption>Navigation: circlek.no and the EV charging pages look and behave like two brands.</figcaption>
+          </figure>
+        </div>
+        <div class="carousel__bar">
+          <button class="carousel__btn" type="button" aria-label="Previous image">←</button>
+          <span class="carousel__count" aria-live="polite">1 / 6</span>
+          <button class="carousel__btn" type="button" aria-label="Next image">→</button>
+        </div>
+      </div>
 
-      <figure class="col-content shot reveal">
-        <div class="shot__frame shot__frame--natural"><img src="assets/cases/circlek-research.jpg" width="1315" height="1015" loading="lazy" alt="Slides from the heuristic evaluation showing UX criteria, annotated pain points and a sitemap"></div>
-        <figcaption>Heuristic evaluation: UX criteria, pain points and a review of the sitemap.</figcaption>
-      </figure>
+      <p class="col-content lede serif reveal">How might we bring fuel and EV into <span class="lede__accent">one design language</span>, without losing the flexibility each product needs?</p>
 
-      <h2 class="col-label row__label reveal">Process</h2>
+      <h2 class="col-label row__label reveal">Approach</h2>
       <div class="col-content prose reveal">
-        <p><strong>Research and evaluation.</strong> I used user research, heuristic evaluations and usability testing to uncover customer pain points and find opportunities for improvement. I led the research initiatives and synthesised the findings with the wider team.</p>
-        <p><strong>Workshops and validation.</strong> The insights fed into ideation workshops and strategic recommendations. I facilitated the workshops and validated concepts through usability testing, including UX analysis and validation to streamline B2B order flows and improve the overall web experience.</p>
+        <p>The work ran in three phases. Discovery uncovered what users needed and where the products fell short. Foundation turned those insights into a plan and a UI foundation. Design delivered templates and prototypes to test the new navigation and interactions.</p>
       </div>
 
       <figure class="col-content shot reveal">
-        <div class="shot__frame shot__frame--natural"><img src="assets/cases/circlek-web.jpg" width="1800" height="1350" loading="lazy" alt="Two Circle K web pages for charging on the road and home charging, on a red background"></div>
-        <figcaption>Web pages for charging on the road and home charging.</figcaption>
+        <div class="shot__frame shot__frame--natural shot__frame--flat"><img src="assets/cases/ck-process.jpg" width="1940" height="842" loading="lazy" alt="The project timeline across discovery, foundation and design, from the kickoff workshop to concept prototypes"></div>
+        <figcaption>From kickoff to concept prototypes.</figcaption>
       </figure>
 
-      <h2 class="col-label row__label reveal">Design system</h2>
       <div class="col-content prose reveal">
-        <p>Alongside the research, I played a key role in evolving the design system across web and mobile. I designed and maintained reusable UI components and patterns, and created scalable foundations for future product growth.</p>
-        <p>The work also aligned interfaces with Circle K’s updated branding and visual identity, supported dark mode and accessibility improvements, and added responsive patterns, so that teams and products could stay consistent as they grew.</p>
+        <p><strong>Workshop.</strong> We kicked off with a workshop on content strategy, data insights and the business journey on circlek.no, then mapped the target groups and their needs. The conclusion was clear: the website should make self-service easy, help with onboarding and give clear next steps after a sale.</p>
       </div>
 
       <figure class="col-content shot reveal">
-        <div class="shot__frame shot__frame--natural"><img src="assets/cases/circlek-foundations.jpg" width="1140" height="572" loading="lazy" alt="CK Lightning design system foundations with colour palettes and Gotham typography"></div>
-        <figcaption>Foundations of the CK Lightning design system: colour and typography.</figcaption>
+        <div class="shot__frame shot__frame--natural"><img src="assets/cases/ck-workshop.jpg" width="2000" height="1500" loading="lazy" alt="A whiteboard from the kickoff workshop mapping business customers, drivers and truck charging needs"></div>
+        <figcaption>Mapping customer groups during the kickoff workshop.</figcaption>
+      </figure>
+
+      <div class="col-content prose reveal">
+        <p><strong>Research.</strong> A heuristic study scored the website on five UX criteria: flow and feedback, guidance, navigation, content structure and visual consistency. We tested the business flows with people from a leasing company, who tried to order home chargers for employees, sign up for reimbursement and order a company card. Many of them needed help to finish.</p>
+        <p>We then mapped every business journey and its entry points, and documented each pain point along the way to shape the wireframes.</p>
+      </div>
+
+      <figure class="col-content shot reveal">
+        <div class="shot__frame shot__frame--natural shot__frame--flat"><img src="assets/cases/ck-journey.jpg" width="1020" height="760" loading="lazy" alt="User journey maps for ordering a company charging card and ordering home chargers, annotated with sticky notes"></div>
+        <figcaption>Journey maps for two business flows.</figcaption>
+      </figure>
+
+      <h2 class="col-label row__label reveal">Key findings</h2>
+      <div class="col-content prose reveal">
+        <p><strong>Findability.</strong> Users struggled to find the right content and the next step, and many needed support to sign up for a new offer.</p>
+        <p><strong>Navigation.</strong> Private and business paths on the EV pages weren’t clearly separated, often sending people back to circlek.no to buy cards. Sub-sections in the menu were easy to miss.</p>
+        <p><strong>Content structure.</strong> Long, text-heavy pages with little overview or imagery made information hard to take in.</p>
+        <p><strong>Visual inconsistency.</strong> Different components, contrast and type made circlek.no and the EV pages feel like two separate brands.</p>
+      </div>
+
+      <h2 class="col-label row__label reveal">UI foundation</h2>
+      <div class="col-content prose reveal">
+        <p>The foundation extends Circle K’s brand into a UI palette with softer, more premium colours, alongside a type system, an icon library and tokens for spacing, grid and transitions. Gotham stays, but in two calm weights, Bold for headings and Book for text, on a 4pt rhythm for type and an 8pt grid for everything else.</p>
+      </div>
+
+      <div class="col-content shot-pair reveal">
+        <figure>
+          <div class="shot__frame shot__frame--flat" style="aspect-ratio: 960 / 1020"><img src="assets/cases/ck-type.jpg" width="960" height="1020" loading="lazy" alt="Gotham type styles for desktop and mobile, from Display 1 down to captions"></div>
+          <figcaption>Type styles for desktop and mobile.</figcaption>
+        </figure>
+        <figure>
+          <div class="shot__frame shot__frame--flat" style="aspect-ratio: 960 / 1020"><img src="assets/cases/ck-colours.jpg" width="960" height="1020" loading="lazy" alt="Brand, system and extended colour palettes with tints from light to dark"></div>
+          <figcaption>Brand, system and extended colours.</figcaption>
+        </figure>
+      </div>
+
+      <figure class="col-content shot reveal">
+        <div class="shot__frame shot__frame--natural shot__frame--flat"><img src="assets/cases/ck-grid.jpg" width="1140" height="720" loading="lazy" alt="The home charging page on a laptop and a phone, laid out on an 8pt grid"></div>
+        <figcaption>An 8pt grid that scales across devices.</figcaption>
+      </figure>
+
+      <div class="col-content prose reveal">
+        <p>Red and orange moved away from buttons and links. Red can read as danger in an interface, so the brand colours now carry expression in non-interactive places instead: illustrations, banners, the private and business tab switcher, and spinners.</p>
+      </div>
+
+      <figure class="col-content shot reveal">
+        <div class="shot__frame shot__frame--natural shot__frame--flat"><img src="assets/cases/ck-expression.jpg" width="1800" height="560" loading="lazy" alt="Examples of red used for illustrations, banners, a tab switcher and a spinner"></div>
+        <figcaption>Red and orange as brand expression, not as calls to action.</figcaption>
+      </figure>
+
+      <h2 class="col-label row__label reveal">Light and dark</h2>
+      <div class="col-content prose reveal">
+        <p>Because every colour is a token, dark mode reuses the light palettes in new combinations rather than introducing new colours. The same approach later carried the system into the home charging app.</p>
+      </div>
+
+      <figure class="col-content shot reveal">
+        <div class="compare" data-compare>
+          <img src="assets/cases/ck-compare-dark.jpg" width="1443" height="812" loading="lazy" alt="The home charging page in dark mode">
+          <div class="compare__top">
+            <img src="assets/cases/ck-compare-light.jpg" width="1443" height="812" loading="lazy" alt="The home charging page in light mode">
+          </div>
+        </div>
+        <figcaption>Drag to compare the home charging page in light and dark.</figcaption>
       </figure>
 
       <figure class="col-content shot reveal">
-        <div class="shot__frame shot__frame--natural"><img src="assets/cases/circlek-themes.jpg" width="1288" height="724" loading="lazy" alt="The Circle K home charging page side by side in light and dark themes"></div>
-        <figcaption>The same page in light and dark themes.</figcaption>
+        <div class="shot__frame shot__frame--natural shot__frame--flat"><img src="assets/cases/ck-app.jpg" width="1254" height="1726" loading="lazy" alt="Three home charging app screens, Charge-o-rama, My chargers and Add charging tag, in light and dark mode"></div>
+        <figcaption>The home charging app in light and dark.</figcaption>
       </figure>
 
-      <h2 class="col-label row__label reveal">Results</h2>
+      <figure class="col-content shot reveal">
+        <div class="shot__frame shot__frame--natural"><img src="assets/cases/ck-semantic.jpg" width="2000" height="1044" loading="lazy" alt="Two dark tables showing which semantic colours can be used for text on each background colour"></div>
+        <figcaption>Guidance on pairing semantic colours with backgrounds.</figcaption>
+      </figure>
+
+      <h2 class="col-label row__label reveal">Lightning Design System</h2>
       <div class="col-content prose reveal">
-        <p>The work delivered customer insights that helped prioritise improvements to the home charging experience and B2B digital flows.</p>
-        <p>The evolving design system gave Circle K a stronger foundation for scalable product development and improved collaboration between cross-functional teams. It also enabled more consistent, accessible and user-friendly experiences across its digital platforms.</p>
+        <p><strong>Visual consistency.</strong> One system now covers every part of Circle K’s offer, and curated palettes tell private and business pages apart.</p>
+        <p><strong>Modular and scalable.</strong> Page sections work as modules that marketing can recombine for new content, and they hold up across breakpoints.</p>
+        <p><strong>Accessible.</strong> Every component meets contrast and legibility requirements, so the content works regardless of visual ability.</p>
+      </div>
+
+      <figure class="col-content shot reveal">
+        <div class="shot__frame shot__frame--natural"><img src="assets/cases/ck-modular.jpg" width="2000" height="1379" loading="lazy" alt="A grid of modular page sections in light and dark, from analytics features to sign-up banners"></div>
+        <figcaption>Modules that recombine for different marketing needs.</figcaption>
+      </figure>
+
+      <figure class="col-content shot reveal">
+        <div class="shot__frame shot__frame--natural shot__frame--flat"><img src="assets/cases/ck-accessibility.jpg" width="960" height="1020" loading="lazy" alt="The button component library with every size, state and variant"></div>
+        <figcaption>The button library, with every size and state.</figcaption>
+      </figure>
+
+      <h2 class="col-label row__label reveal">Revamped pages</h2>
+      <div class="col-content prose reveal">
+        <p>We applied the system to three key touchpoints, circlek.no, the home charging page and the business pages, and built prototypes to test the navigation and interactions.</p>
+      </div>
+
+      <figure class="col-content shot reveal">
+        <div class="shot__frame shot__frame--natural shot__frame--flat"><img src="assets/cases/ck-pages.jpg" width="2340" height="1444" loading="lazy" alt="The redesigned circlek.no, home charging and business pages side by side"></div>
+        <figcaption>circlek.no, home charging and business, on one system.</figcaption>
+      </figure>
+
+      <div class="col-content prose reveal">
+        <p>The system was also built to absorb a rebrand. With new colours, rounder shapes and softer sections, the same modules take on a fresh look without starting over.</p>
+      </div>
+
+      <figure class="col-content shot reveal">
+        <div class="shot__frame shot__frame--natural shot__frame--flat"><img src="assets/cases/ck-rebrand.jpg" width="2008" height="1444" loading="lazy" alt="The home charging page before and after the rebrand, with softer pink sections and rounded corners"></div>
+        <figcaption>The same page before and after the rebrand.</figcaption>
+      </figure>
+
+      <h2 class="col-label row__label reveal">Outcome</h2>
+      <div class="col-content prose reveal">
+        <p>The Lightning Design System was completed in January 2024. It adapts across platforms and touchpoints, serves both B2B and B2C customers, and offers customisable themes with light and dark modes.</p>
+        <p>By fixing the inconsistencies and following best practice, it improved the web and mobile experience and made collaboration across Circle K’s teams easier.</p>
       </div>
 
     </div>
@@ -150,6 +281,7 @@
 
 </div>
 
+<script src="lock.js?v=1"></script>
 <script src="theme.js?v=75"></script>
 <script src="nav.js?v=72"></script>
 <script src="motion.js?v=77"></script>
