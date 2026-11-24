@@ -70,6 +70,11 @@
           <p>We researched how people actually moved through these products, then built the Lightning Design System: one modular, accessible design language for B2C and B2B, with themes and light and dark modes built in.</p>
         </div>
       </div>
+
+      <figure class="col-content shot case-figure reveal">
+        <div class="shot__frame shot__frame--natural shot__frame--flat"><img src="assets/circle-k-tile.jpg" width="2000" height="1500" loading="lazy" alt="The redesigned Circle K home charging page on a laptop against a red background"></div>
+        <figcaption>The redesigned home charging page.</figcaption>
+      </figure>
     </section>
 
     <div class="grid case-body">
@@ -130,11 +135,6 @@
         <p><strong>Workshop.</strong> We kicked off with a workshop on content strategy, data insights and the business journey on circlek.no, then mapped the target groups and their needs. The conclusion was clear: the website should make self-service easy, help with onboarding and give clear next steps after a sale.</p>
       </div>
 
-      <figure class="col-content shot reveal">
-        <div class="shot__frame shot__frame--natural"><img src="assets/cases/ck-workshop.jpg" width="2000" height="1500" loading="lazy" alt="A whiteboard from the kickoff workshop mapping business customers, drivers and truck charging needs"></div>
-        <figcaption>Mapping customer groups during the kickoff workshop.</figcaption>
-      </figure>
-
       <div class="col-content prose reveal">
         <p><strong>Research.</strong> A heuristic study scored the website on five UX criteria: flow and feedback, guidance, navigation, content structure and visual consistency. We tested the business flows with people from a leasing company, who tried to order home chargers for employees, sign up for reimbursement and order a company card. Many of them needed help to finish.</p>
         <p>We then mapped every business journey and its entry points, and documented each pain point along the way to shape the wireframes.</p>
@@ -156,32 +156,34 @@
       <h2 class="col-label row__label reveal">UI foundation</h2>
       <div class="col-content prose reveal">
         <p>The foundation extends Circle K’s brand into a UI palette with softer, more premium colours, alongside a type system, an icon library and tokens for spacing, grid and transitions. Gotham stays, but in two calm weights, Bold for headings and Book for text, on a 4pt rhythm for type and an 8pt grid for everything else.</p>
-      </div>
-
-      <div class="col-content shot-pair reveal">
-        <figure>
-          <div class="shot__frame shot__frame--flat" style="aspect-ratio: 960 / 1020"><img src="assets/cases/ck-type.jpg" width="960" height="1020" loading="lazy" alt="Gotham type styles for desktop and mobile, from Display 1 down to captions"></div>
-          <figcaption>Type styles for desktop and mobile.</figcaption>
-        </figure>
-        <figure>
-          <div class="shot__frame shot__frame--flat" style="aspect-ratio: 960 / 1020"><img src="assets/cases/ck-colours.jpg" width="960" height="1020" loading="lazy" alt="Brand, system and extended colour palettes with tints from light to dark"></div>
-          <figcaption>Brand, system and extended colours.</figcaption>
-        </figure>
-      </div>
-
-      <figure class="col-content shot reveal">
-        <div class="shot__frame shot__frame--natural shot__frame--flat"><img src="assets/cases/ck-grid.jpg" width="1140" height="720" loading="lazy" alt="The home charging page on a laptop and a phone, laid out on an 8pt grid"></div>
-        <figcaption>An 8pt grid that scales across devices.</figcaption>
-      </figure>
-
-      <div class="col-content prose reveal">
         <p>Red and orange moved away from buttons and links. Red can read as danger in an interface, so the brand colours now carry expression in non-interactive places instead: illustrations, banners, the private and business tab switcher, and spinners.</p>
       </div>
 
-      <figure class="col-content shot reveal">
-        <div class="shot__frame shot__frame--natural shot__frame--flat"><img src="assets/cases/ck-expression.jpg" width="1800" height="560" loading="lazy" alt="Examples of red used for illustrations, banners, a tab switcher and a spinner"></div>
-        <figcaption>Red and orange as brand expression, not as calls to action.</figcaption>
-      </figure>
+      <div class="col-content carousel reveal" data-carousel role="group" aria-roledescription="carousel" aria-label="UI foundation" tabindex="0">
+        <div class="carousel__track">
+          <figure class="carousel__slide">
+            <div class="shot__frame shot__frame--flat" style="aspect-ratio: 16 / 10"><img src="assets/cases/ck-type-16x10.jpg" width="1600" height="1000" loading="lazy" alt="Gotham type styles for desktop and mobile, from Display 1 down to captions"></div>
+            <figcaption>Type styles for desktop and mobile.</figcaption>
+          </figure>
+          <figure class="carousel__slide">
+            <div class="shot__frame shot__frame--flat" style="aspect-ratio: 16 / 10"><img src="assets/cases/ck-colours-16x10.jpg" width="1600" height="1000" loading="lazy" alt="Brand, system and extended colour palettes with tints from light to dark"></div>
+            <figcaption>Brand, system and extended colours.</figcaption>
+          </figure>
+          <figure class="carousel__slide">
+            <div class="shot__frame shot__frame--flat" style="aspect-ratio: 16 / 10"><img src="assets/cases/ck-grid-16x10.jpg" width="1600" height="1000" loading="lazy" alt="The home charging page on a laptop and a phone, laid out on an 8pt grid"></div>
+            <figcaption>An 8pt grid that scales across devices.</figcaption>
+          </figure>
+          <figure class="carousel__slide">
+            <div class="shot__frame shot__frame--flat" style="aspect-ratio: 16 / 10"><img src="assets/cases/ck-expression-16x10.jpg" width="1600" height="1000" loading="lazy" alt="Examples of red used for illustrations, banners, a tab switcher and a spinner"></div>
+            <figcaption>Red and orange as brand expression, not as calls to action.</figcaption>
+          </figure>
+        </div>
+        <div class="carousel__bar">
+          <button class="carousel__btn" type="button" aria-label="Previous image">←</button>
+          <span class="carousel__count" aria-live="polite">1 / 4</span>
+          <button class="carousel__btn" type="button" aria-label="Next image">→</button>
+        </div>
+      </div>
 
       <h2 class="col-label row__label reveal">Light and dark</h2>
       <div class="col-content prose reveal">
@@ -198,16 +200,6 @@
         <figcaption>Drag to compare the home charging page in light and dark.</figcaption>
       </figure>
 
-      <figure class="col-content shot reveal">
-        <div class="shot__frame shot__frame--natural shot__frame--flat"><img src="assets/cases/ck-app.jpg" width="1254" height="1726" loading="lazy" alt="Three home charging app screens, Charge-o-rama, My chargers and Add charging tag, in light and dark mode"></div>
-        <figcaption>The home charging app in light and dark.</figcaption>
-      </figure>
-
-      <figure class="col-content shot reveal">
-        <div class="shot__frame shot__frame--natural"><img src="assets/cases/ck-semantic.jpg" width="2000" height="1044" loading="lazy" alt="Two dark tables showing which semantic colours can be used for text on each background colour"></div>
-        <figcaption>Guidance on pairing semantic colours with backgrounds.</figcaption>
-      </figure>
-
       <h2 class="col-label row__label reveal">Lightning Design System</h2>
       <div class="col-content prose reveal">
         <p><strong>Visual consistency.</strong> One system now covers every part of Circle K’s offer, and curated palettes tell private and business pages apart.</p>
@@ -215,15 +207,27 @@
         <p><strong>Accessible.</strong> Every component meets contrast and legibility requirements, so the content works regardless of visual ability.</p>
       </div>
 
-      <figure class="col-content shot reveal">
-        <div class="shot__frame shot__frame--natural"><img src="assets/cases/ck-modular.jpg" width="2000" height="1379" loading="lazy" alt="A grid of modular page sections in light and dark, from analytics features to sign-up banners"></div>
-        <figcaption>Modules that recombine for different marketing needs.</figcaption>
-      </figure>
-
-      <figure class="col-content shot reveal">
-        <div class="shot__frame shot__frame--natural shot__frame--flat"><img src="assets/cases/ck-accessibility.jpg" width="960" height="1020" loading="lazy" alt="The button component library with every size, state and variant"></div>
-        <figcaption>The button library, with every size and state.</figcaption>
-      </figure>
+      <div class="col-content carousel reveal" data-carousel role="group" aria-roledescription="carousel" aria-label="Design system details" tabindex="0">
+        <div class="carousel__track">
+          <figure class="carousel__slide">
+            <div class="shot__frame shot__frame--flat" style="aspect-ratio: 16 / 10"><img src="assets/cases/ck-app-16x10.jpg" width="1600" height="1000" loading="lazy" alt="Three home charging app screens, Charge-o-rama, My chargers and Add charging tag, in light and dark mode"></div>
+            <figcaption>The home charging app in light and dark.</figcaption>
+          </figure>
+          <figure class="carousel__slide">
+            <div class="shot__frame shot__frame--flat" style="aspect-ratio: 16 / 10"><img src="assets/cases/ck-semantic-16x10.jpg" width="1600" height="1000" loading="lazy" alt="Two dark tables showing which semantic colours can be used for text on each background colour"></div>
+            <figcaption>Guidance on pairing semantic colours with backgrounds.</figcaption>
+          </figure>
+          <figure class="carousel__slide">
+            <div class="shot__frame shot__frame--flat" style="aspect-ratio: 16 / 10"><img src="assets/cases/ck-accessibility-16x10.jpg" width="1600" height="1000" loading="lazy" alt="The button component library with every size, state and variant"></div>
+            <figcaption>The button library, with every size and state.</figcaption>
+          </figure>
+        </div>
+        <div class="carousel__bar">
+          <button class="carousel__btn" type="button" aria-label="Previous image">←</button>
+          <span class="carousel__count" aria-live="polite">1 / 3</span>
+          <button class="carousel__btn" type="button" aria-label="Next image">→</button>
+        </div>
+      </div>
 
       <h2 class="col-label row__label reveal">Revamped pages</h2>
       <div class="col-content prose reveal">
@@ -235,13 +239,15 @@
         <figcaption>circlek.no, home charging and business, on one system.</figcaption>
       </figure>
 
+      <h2 class="col-label row__label reveal">Fleet manager flow</h2>
       <div class="col-content prose reveal">
-        <p>The system was also built to absorb a rebrand. With new colours, rounder shapes and softer sections, the same modules take on a fresh look without starting over.</p>
+        <p>In parallel, I was also part of designing the fleet manager flow, an effort to shape Circle K’s B2E (business-to-employee) journeys. It was a good test of the design system in a real, multi-step flow.</p>
+        <p>A company can offer home chargers to its employees: pick chargers, cables and accessories, add employees one by one or import them from a CSV file, review everything in a summary, and see what happens next for each employee, from installation to reimbursement.</p>
       </div>
 
       <figure class="col-content shot reveal">
-        <div class="shot__frame shot__frame--natural shot__frame--flat"><img src="assets/cases/ck-rebrand.jpg" width="2008" height="1444" loading="lazy" alt="The home charging page before and after the rebrand, with softer pink sections and rounded corners"></div>
-        <figcaption>The same page before and after the rebrand.</figcaption>
+        <div class="shot__frame shot__frame--flat" style="aspect-ratio: 1260 / 876"><video src="assets/cases/ck-fleet-manager.mp4" poster="assets/cases/ck-fleet-manager.jpg" width="1260" height="876" muted loop playsinline preload="metadata" data-autoplay aria-label="Screen recording of the fleet manager flow, from choosing chargers and adding employees to the order summary"></video></div>
+        <figcaption>The fleet manager flow, from choosing products to the order summary.</figcaption>
       </figure>
 
       <h2 class="col-label row__label reveal">Outcome</h2>
